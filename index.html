@@ -104,24 +104,32 @@
                         <input type="text" v-model= "last_name" style='width: 500px'>
                     </li>
 
-                    <li class='user-pass-create'>
+                    <li class='user-pass-create' style="margin-left: 206px;">
 
                         Username:
                         <input type="text" v-model= "new_username" style='width: 500px'>
 
                     </li>
 
-                    <li class='user-pass-create'>
+                    <li class='user-pass-create' style="margin-left: 207px;">
 
                         Password:
                         <input type="text" v-model= "new_password" style='width: 500px'>
 
                     </li>
 
-                    <li class='user-pass-create'>
+                    <li class='user-pass-create' style='margin-left: 120px;'>
 
                         Repeat Password:
                         <input type="text" v-model= "new_password_2" style='width: 500px'>
+
+                    </li>
+                    
+                    <li style="padding-top: 50px;">
+
+                        <button v-on:click="createAccountButton_2" class='sign-in-btn'>
+                            Create an Account!
+                        </button>
 
                     </li>
                 </ul>

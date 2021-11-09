@@ -10,6 +10,8 @@ var app_view = new Vue({
         showLeaderboard: false,
         showProfile: false,
 
+        showNavbar: false,
+
 
         Profile: "Profile",
 
@@ -20,7 +22,7 @@ var app_view = new Vue({
         new_username: '',
         new_password: '',
         new_password_2: '',
-        
+
 
     },
 
@@ -34,6 +36,7 @@ var app_view = new Vue({
                 this.showProfile = false;
                 //show the feed
                 this.showFeed = true;
+                this.showNavbar = true;
 
             }
             else{
@@ -45,6 +48,7 @@ var app_view = new Vue({
                 this.showCreateAccount = false;
                 this.showMakeAPost = false;
                 this.showLeaderboard = false;
+                this.showNavbar = true;
             }
 
         }, //end profileClick function
@@ -60,6 +64,7 @@ var app_view = new Vue({
             //IF SUCCESS THEN GO TO FEED
             this.showFeed = true;
             this.showSignIn = false;
+            this.showNavbar = true;
 
 
         },//end sign in button function
@@ -70,10 +75,31 @@ var app_view = new Vue({
             //first go to create an account screen
             this.showSignIn = false;
             this.showCreateAccount = true;
-
-
-
         },//end create account button
+
+        //calls when they create the accout
+        createAccountButton_2: function(event){
+
+            //first check that the password is the same
+            if(this.new_password != this.new_password_2){
+                alert("Passwords do not match please try again");
+                return;
+            }
+
+            else{
+
+                //call to api to get the account created
+
+
+                //if account is successfully created
+                this.showCreateAccount = false;
+                this.showFeed = true;
+                this.showNavbar = true;
+
+            }
+
+
+        },
 
 
 
