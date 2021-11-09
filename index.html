@@ -22,56 +22,134 @@
     </title>
 </head>
 
-<body id="app">
-    <!-- Header -->
-    <nav class="navbar navbar-default">
-        <div class="container">
-            <div class="navbar-header">
-                <h3 class='title'>Run<span style="color:blue">Blue</span></h3>
+<body>
+    <div id="app">
+
+        <!-- Header -->
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <h3 class='title'>Run<span style="color:blue">Blue</span></h3>
+                </div>
+
+                <ul class="navbar-nav mr-auto" style="list-style: none;">
+                    <li class="nav-item active">
+                        <img src="./runningGif.gif" alt="Man running across screen" width="800" height=100px class="runningGif">
+                    </li>
+
+                    <li class="nav-item active profileBtn">
+                        <button class="btn-primary" v-on:click="profileClick" style="height: 50px;"> {{Profile}} </button>
+                    </li>
+
+            </div>
+        </nav>
+
+        <!-- Sign In -->
+        <div class="container" v-show="showSignIn">
+            <div style="font-size: 75px; text-align: center;">
+                Welcome to Run<span style="color:blue">Blue</span>!
             </div>
 
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <img src="./runningGif.gif" alt="Man running across screen" width="800" height=100px class="runningGif">
-                </li>
+            <div>
+                <ul style="list-style: none;">
+                    <li class="user-pass">
+                        Username: 
 
-                <li class="nav-item active profileBtn">
-                    <button class="btn-primary" v-on:click="profileClick" style="height: 50px;"> {{Profile}} </button>
-                </li>
+                        <input type="text" v-model= "username" style="width: 500px;">
 
-            </ul>
+                    </li>
 
-            
+                    <li class="user-pass">
+                        Password:
+                        <input type="text" v-model= "password" style='width: 500px'>
+                    </li>
 
-            
+                    <li style="padding-top: 50px;">
 
-          
+                        <button v-on:click="signInButton" class='sign-in-btn'>
+                            Log In!
+                        </button>
+
+                    </li>
+
+                    <li style="padding-top: 50px;">
+
+                        <button v-on:click="createAccountButton" class='sign-in-btn'>
+                            Create an Account!
+                        </button>
+
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+
+        <!-- Create Account -->
+        <div class="container" v-show="showCreateAccount">
+            <div style="font-size: 40px; text-align: center;">
+                Enter in some Information to Create a Run<span style="color:blue">Blue</span> Account!
+            </div>
+
+            <div>
+                <ul style="list-style: none;">
+                    <li class="user-pass-create">
+                        First Name: 
+
+                        <input type="text" v-model= "first_name" style="width: 500px;">
+
+                    </li>
+
+                    <li class="user-pass-create">
+                        Last Name: 
+                        <input type="text" v-model= "last_name" style='width: 500px'>
+                    </li>
+
+                    <li class='user-pass-create'>
+
+                        Username:
+                        <input type="text" v-model= "new_username" style='width: 500px'>
+
+                    </li>
+
+                    <li class='user-pass-create'>
+
+                        Password:
+                        <input type="text" v-model= "new_password" style='width: 500px'>
+
+                    </li>
+
+                    <li class='user-pass-create'>
+
+                        Repeat Password:
+                        <input type="text" v-model= "new_password_2" style='width: 500px'>
+
+                    </li>
+                </ul>
+
+            </div>
+
+
 
         </div>
-    </nav>
 
-    <!-- Sign In -->
-    <div class="container" v-show="showSignIn"></div>
+        <!-- Feed -->
+        <div class="container" v-show="showFeed"></div>
 
-    <!-- Create Account -->
-    <div class="container" v-show="showCreateAccount"></div>
+        <!-- Make a Post -->
+        <div class="container" v-show="showMakeAPost"></div>
 
-    <!-- Feed -->
-    <div class="container" v-show="showFeed"></div>
+        <!-- Leaderboard -->
+        <div class="container" v-show="showLeaderboard"></div>
 
-    <!-- Make a Post -->
-    <div class="container" v-show="showMakeAPost"></div>
-
-    <!-- Leaderboard -->
-    <div class="container" v-show="showLeaderboard"></div>
-
-    <!-- Profile -->
-    <div class="container" v-show="showProfile"></div>
+        <!-- Profile -->
+        <div class="container" v-show="showProfile">
+            This is the profile screen
+        </div>
 
 
 
+    </div>
 
-    
 </body>
 
 
