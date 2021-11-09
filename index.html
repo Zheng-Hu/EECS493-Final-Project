@@ -37,8 +37,8 @@
                         <img src="./runningGif.gif" alt="Man running across screen" width="800" height=100px class="runningGif">
                     </li>
 
-                    <li class="nav-item active profileBtn">
-                        <button class="btn-primary" v-on:click="profileClick" style="height: 50px;"> {{Profile}} </button>
+                    <li class="nav-item active profileBtn" v-show="noProfile">
+                        <button :class='showProfile ? Success: Normal' v-on:click="profileClick" style="height: 50px;"> {{Profile}} </button>
                     </li>
 
             </div>

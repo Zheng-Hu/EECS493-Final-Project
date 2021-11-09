@@ -12,6 +12,8 @@ var app_view = new Vue({
 
         showNavbar: false,
 
+        noProfile: false,
+
 
         Profile: "Profile",
 
@@ -68,6 +70,7 @@ var app_view = new Vue({
             this.showFeed = true;
             this.showSignIn = false;
             this.showNavbar = true;
+            this.noProfile = true;
 
 
         },//end sign in button function
@@ -98,6 +101,7 @@ var app_view = new Vue({
                 this.showCreateAccount = false;
                 this.showFeed = true;
                 this.showNavbar = true;
+                this.noProfile = true;
 
             }
 
