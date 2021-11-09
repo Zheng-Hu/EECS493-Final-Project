@@ -101,6 +101,17 @@ var app_view = new Vue({
 
         },
 
+        feedClick: function(event){
+
+        },
+        makeAPostClick: function(event){
+
+
+        },
+        leaderboardClick: function(event){
+
+        },
+
 
 
 
