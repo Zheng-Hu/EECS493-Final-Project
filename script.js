@@ -23,6 +23,9 @@ var app_view = new Vue({
         new_password: '',
         new_password_2: '',
 
+        Success: "btn-success",
+        Normal: "btn-primary",
+
 
     },
 
@@ -102,13 +105,25 @@ var app_view = new Vue({
         },
 
         feedClick: function(event){
+            this.showFeed = true;
+            this.showMakeAPost = false;
+            this.showLeaderboard = false;
+            this.showProfile = false;
 
         },
         makeAPostClick: function(event){
+            this.showFeed = false;
+            this.showMakeAPost = true;
+            this.showLeaderboard = false;
+            this.showProfile = false;
 
 
         },
         leaderboardClick: function(event){
+            this.showFeed = false;
+            this.showLeaderboard = true;
+            this.showMakeAPost = false;
+            this.showProfile = false;
 
         },
 

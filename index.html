@@ -56,14 +56,14 @@
                         <ul class="navbar-nav mr-auto" style="list-style: none;">
 
                             <li class="nav-item active" style="margin-left: 200px;">
-                                <button class='btn-primary' v-on:click="makeAPostClick" style="height: 50px; width: 100px;"> Make A Post </button>
+                                <button :class='showMakeAPost ? Success: Normal' v-on:click="makeAPostClick" style="height: 50px; width: 100px;"> Make A Post </button>
                             </li>
 
                             <li class="nav-item active" style="margin-left: 200px;">
-                                <button class="btn-primary" v-on:click="feedClick" style="height: 50px; width: 100px;"> Feed</button>
+                                <button :class="showFeed ? Success: Normal" v-on:click="feedClick" style="height: 50px; width: 100px;"> Feed</button>
                             </li>
                             <li class="nav-item active" style="margin-left: 200px;">
-                                <button class="btn-primary" v-on:click="leaderboardClick" style="height: 50px; width: 100px;"> Leaderboard</button>
+                                <button :class="showLeaderboard ? Success: Normal" v-on:click="leaderboardClick" style="height: 50px; width: 100px;"> Leaderboard</button>
                             </li>
                         </ul>
 
