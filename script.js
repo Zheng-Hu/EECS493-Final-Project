@@ -28,6 +28,10 @@ var app_view = new Vue({
         Success: "btn-success",
         Normal: "btn-primary",
 
+        //HARD CODED FEED DATA
+
+        feedArray: [{"username": "john", "runIMG": "./johnrunning.jpeg", "Caption": "1 mile run", "Distance" : "1 mile", "Time": "30 minutes" }, { "username": "jack", "runIMG": "./jackrunning.jpeg", "Caption": "2 mile run", "Distance" : "2 mile", "Time": "20 minutes" }, {"username": "jill", "runIMG": "./jillrunning.jpeg", "Caption": "3 mile run", "Distance" : "3 mile", "Time": "60 minutes"  }],
+
 
     },
 
