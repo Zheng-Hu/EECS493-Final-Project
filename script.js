@@ -29,8 +29,19 @@ var app_view = new Vue({
         Normal: "btn-primary",
 
         //HARD CODED FEED DATA
+        feedArray: [{"username": "john", "runIMG": "./johnrunning.jpeg", "Caption": "1 mile run", "Distance" : "1 mile", "Time": "30 minutes", "Date": "10/3/10", "Comments": "{'username': 'susan', 'comment': 'what a great run today!'}"}, { "username": "jack", "runIMG": "./jackrunning.jpeg", "Caption": "2 mile run", "Distance" : "2 mile", "Time": "20 minutes","Date": "10/10/10","Caption": "1 mile run", "Distance" : "1 mile", "Time": "30 minutes", "Date": "10/3/10", "Comments": "{'username': 'sam', 'comment': 'awesome!'}" }, {"username": "jill", "runIMG": "./jillrunning.jpeg", "Caption": "3 mile run", "Distance" : "3 mile", "Time": "60 minutes","Date": "10/3/21","Caption": "1 mile run", "Distance" : "1 mile", "Time": "30 minutes", "Date": "10/3/10", "Comments": "{'username': 'sara', 'comment': 'lookin' good!'}"  }],
 
-        feedArray: [{"username": "john", "runIMG": "./johnrunning.jpeg", "Caption": "1 mile run", "Distance" : "1 mile", "Time": "30 minutes" }, { "username": "jack", "runIMG": "./jackrunning.jpeg", "Caption": "2 mile run", "Distance" : "2 mile", "Time": "20 minutes" }, {"username": "jill", "runIMG": "./jillrunning.jpeg", "Caption": "3 mile run", "Distance" : "3 mile", "Time": "60 minutes"  }],
+        heartImage: ['./heartNOFill.png','./heartNOFill.png','./heartNOFill.png'],
+        noFillHeart: "./heartNOFill.png",
+        heartFill: "./heartFill.png",
+
+        postLiked: [false,false,false],
+
+        Comment: [false, false, false],
+
+        user_comment: [],
+
+        showCommentsBox: [false, false, false],
 
 
     },
@@ -134,6 +145,54 @@ var app_view = new Vue({
             this.showProfile = false;
 
         },
+
+        showComments: function(index){
+
+            if(this.showCommentsBox[index] == false){
+                this.$set(this.showCommentsBox, index, true);
+            }
+            else{
+                this.$set(this.showCommentsBox, index, false);
+            }
+
+
+        },
+
+        likePost: function(index){
+            //post is not liked so like the post
+            if(this.postLiked[index] == false){
+                this.postLiked[index] = true;
+                this.$set(this.heartImage, index, this.heartFill);
+            }
+            else{
+                this.postLiked[index] = false;
+                this.heartImage[index] = this.noFillHeart;
+                this.$set(this.heartImage, index, this.noFillHeart);
+            }
+
+
+        },
+
+        commentPost: function(index){
+        
+            if(this.Comment[index] == false){
+                this.$set(this.Comment, index, true);
+            }
+            else{
+                this.$set(this.Comment,index, false);
+            }
+
+
+        },
+
+        postComment: function(index){
+
+            //add the comment to the comment box
+            //set to the index of the input which is user_comment
+
+            this.$set(this.Comment, index, false);
+
+        }
 
 
 

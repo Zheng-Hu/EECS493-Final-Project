@@ -174,7 +174,87 @@
         </div>
 
         <!-- Feed -->
-        <div class="container" v-show="showFeed"></div>
+        <div class="container" v-show="showFeed">
+
+            <div v-for="(person, index) in feedArray" style="margin-top: 50px;">
+
+                <div class="feedTitle">
+                    {{person.username}}'s Run on {{person.Date}}
+                </div>
+                <div>
+                    <img v-bind:src='person.runIMG' class='feedImage'>
+                </div>
+
+                <div class="feedDescription">
+                    <div style="margin-left: 5px;">
+                        {{person.username}}: {{person.Caption}}
+                    </div>
+                    <div style="margin-left: 5px;">
+                        Distance: {{person.Distance}}
+                    </div>
+                    <div style="margin-left: 5px;">
+                        Time: {{person.Time}}
+                    </div>
+
+                    <button class='btn' v-on:click="showComments(index)" style="margin-left: 42%; margin-bottom: 10px;">
+                        See Comments!
+                    </button>
+
+                    <div>
+
+                        
+                        <button class='btn' v-on:click="likePost(index)" style="margin-left: 150px; margin-bottom: 10px;">
+                            Like {{person.username}}'s Post
+                        </button>
+    
+                        <img v-bind:src="heartImage[index]" class="heartStyle">
+
+                        <button class='btn' v-on:click="commentPost(index)" style="margin-left: 175px; margin-bottom: 10px;">
+                            Comment on {{person.username}}'s Post
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <div v-show="Comment[index]" class='commentBox'>
+                    Type Comment: 
+                    <input type="text" v-model= "user_comment" style='width: 500px'>
+
+                    <button class='btn-primary' v-on:click="postComment(index)">
+                        Post!
+                    </button>
+
+                </div>
+
+                <div v-show="showCommentsBox[index]" class='allComments'>
+
+                    Comments:
+
+                    <div v-for="(personComment, index_2) in person.Comments">
+                        {{personComment.username}} says {{personComment.comment}}
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
 
         <!-- Make a Post -->
         <div class="container" v-show="showMakeAPost"></div>
