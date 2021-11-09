@@ -18,7 +18,7 @@
 
     <!--  -->
     <link rel="stylesheet" href="./style.css">
-    <script src="./script.js" defer></script>
+    <script src="script.js" defer></script>
     </title>
 </head>
 
@@ -27,8 +27,26 @@
     <nav class="navbar navbar-default">
         <div class="container">
             <div class="navbar-header">
-                <h3>Run Blue</h3>
+                <h3 class='title'>Run<span style="color:blue">Blue</span></h3>
             </div>
+
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <img src="./runningGif.gif" alt="Man running across screen" width="800" height=100px class="runningGif">
+                </li>
+
+                <li class="nav-item active profileBtn">
+                    <button class="btn-primary" v-on:click="profileClick" style="height: 50px;"> {{Profile}} </button>
+                </li>
+
+            </ul>
+
+            
+
+            
+
+          
+
         </div>
     </nav>
 
@@ -52,4 +70,9 @@
 
 
 
+
+    
 </body>
+
+
+</html>

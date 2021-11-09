@@ -7,13 +7,20 @@ var app_view = new Vue({
         showMakeAPost: false,
         showLeaderboard: false,
         showProfile: false,
+
+
+        Profile: "Profile",
+
     },
+
     methods: {
 
     },
+    
     computed: {
 
     },
+    
     mounted() {
 
     }

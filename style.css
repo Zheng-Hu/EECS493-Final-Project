@@ -1,2 +1,15 @@
-body {
+
+
+.runningGif{
+    margin-left: 5%;
+    margin-top: -18px;
+}
+
+.title{
+    font-size: 40px;
+}
+
+.profileBtn{
+padding-left: 50px;
+   padding-top: 20px;
 }
