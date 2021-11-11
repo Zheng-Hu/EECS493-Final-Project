@@ -3,10 +3,10 @@
 var app_view = new Vue({
     el: '#app',
     data: {
-        showSignIn: true,
+        showSignIn: false,
         showCreateAccount: false,
         showFeed: false,
-        showMakeAPost: false,
+        showMakeAPost: true,
         showLeaderboard: false,
         showProfile: false,
 

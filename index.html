@@ -18,13 +18,13 @@
 
     <!--  -->
     <link rel="stylesheet" href="./style.css">
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="./sign_in.css">
+    <script src="./script.js" defer></script>
     </title>
 </head>
 
 <body>
     <div id="app">
-
         <!-- Header -->
         <nav class="navbar navbar-default">
             <div class="container">
@@ -34,11 +34,13 @@
 
                 <ul class="navbar-nav mr-auto" style="list-style: none;">
                     <li class="nav-item active">
-                        <img src="./runningGif.gif" alt="Man running across screen" width="800" height=100px class="runningGif">
+                        <img src="./runningGif.gif" alt="Man running across screen" width="800" height=100px
+                            class="runningGif">
                     </li>
 
                     <li class="nav-item active profileBtn" v-show="noProfile">
-                        <button :class='showProfile ? Success: Normal' v-on:click="profileClick" style="height: 50px;"> {{Profile}} </button>
+                        <button :class='showProfile ? Success: Normal' v-on:click="profileClick" style="height: 50px;">
+                            {{Profile}} </button>
                     </li>
 
             </div>
@@ -56,14 +58,17 @@
                         <ul class="navbar-nav mr-auto" style="list-style: none;">
 
                             <li class="nav-item active" style="margin-left: 200px;">
-                                <button :class='showMakeAPost ? Success: Normal' v-on:click="makeAPostClick" style="height: 50px; width: 100px;"> Make A Post </button>
+                                <button :class='showMakeAPost ? Success: Normal' v-on:click="makeAPostClick"
+                                    style="height: 50px; width: 100px;"> Make A Post </button>
                             </li>
 
                             <li class="nav-item active" style="margin-left: 200px;">
-                                <button :class="showFeed ? Success: Normal" v-on:click="feedClick" style="height: 50px; width: 100px;"> Feed</button>
+                                <button :class="showFeed ? Success: Normal" v-on:click="feedClick"
+                                    style="height: 50px; width: 100px;"> Feed</button>
                             </li>
                             <li class="nav-item active" style="margin-left: 200px;">
-                                <button :class="showLeaderboard ? Success: Normal" v-on:click="leaderboardClick" style="height: 50px; width: 100px;"> Leaderboard</button>
+                                <button :class="showLeaderboard ? Success: Normal" v-on:click="leaderboardClick"
+                                    style="height: 50px; width: 100px;"> Leaderboard</button>
                             </li>
                         </ul>
 
@@ -83,38 +88,23 @@
                 Welcome to Run<span style="color:blue">Blue</span>!
             </div>
 
-            <div>
-                <ul style="list-style: none;">
-                    <li class="user-pass">
-                        Username: 
 
-                        <input type="text" v-model= "username" style="width: 500px;">
-
-                    </li>
-
-                    <li class="user-pass">
-                        Password:
-                        <input type="text" v-model= "password" style='width: 500px'>
-                    </li>
-
-                    <li style="padding-top: 50px;">
-
-                        <button v-on:click="signInButton" class='sign-in-btn'>
-                            Log In!
-                        </button>
-
-                    </li>
-
-                    <li style="padding-top: 50px;">
-
-                        <button v-on:click="createAccountButton" class='sign-in-btn'>
-                            Create an Account!
-                        </button>
-
-                    </li>
-                </ul>
-
+            <div class="form-group">
+                <label for="username_input">Username or Email</label>
+                <input type="email" class="form-control" id="username_input" aria-describedby="emailHelp"
+                    placeholder="Enter username or email">
             </div>
+            <div class="form-group">
+                <label for="password_input">Password</label>
+                <input type="password" class="form-control" id="password_input" placeholder="Password">
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="keep_me_singed_in_check">
+                <label class="form-check-label" for="keep_me_singed_in_check">Keep me signed in</label>
+            </div>
+            <button type="submit" class="btn btn-primary sign-in-button" v-on:click="signInButton">Submit</button>
+            <button type="button" class="btn btn-warning sign-in-button" v-on:click="createAccountButton">Create
+                Account</button>
         </div>
 
         <!-- Create Account -->
@@ -126,38 +116,38 @@
             <div>
                 <ul style="list-style: none;">
                     <li class="user-pass-create">
-                        First Name: 
+                        First Name:
 
-                        <input type="text" v-model= "first_name" style="width: 500px;">
+                        <input type="text" v-model="first_name" style="width: 500px;">
 
                     </li>
 
                     <li class="user-pass-create">
-                        Last Name: 
-                        <input type="text" v-model= "last_name" style='width: 500px'>
+                        Last Name:
+                        <input type="text" v-model="last_name" style='width: 500px'>
                     </li>
 
                     <li class='user-pass-create' style="margin-left: 206px;">
 
                         Username:
-                        <input type="text" v-model= "new_username" style='width: 500px'>
+                        <input type="text" v-model="new_username" style='width: 500px'>
 
                     </li>
 
                     <li class='user-pass-create' style="margin-left: 207px;">
 
                         Password:
-                        <input type="text" v-model= "new_password" style='width: 500px'>
+                        <input type="text" v-model="new_password" style='width: 500px'>
 
                     </li>
 
                     <li class='user-pass-create' style='margin-left: 120px;'>
 
                         Repeat Password:
-                        <input type="text" v-model= "new_password_2" style='width: 500px'>
+                        <input type="text" v-model="new_password_2" style='width: 500px'>
 
                     </li>
-                    
+
                     <li style="padding-top: 50px;">
 
                         <button v-on:click="createAccountButton_2" class='sign-in-btn'>
@@ -202,14 +192,16 @@
 
                     <div>
 
-                        
-                        <button class='btn' v-on:click="likePost(index)" style="margin-left: 150px; margin-bottom: 10px;">
+
+                        <button class='btn' v-on:click="likePost(index)"
+                            style="margin-left: 150px; margin-bottom: 10px;">
                             Like {{person.username}}'s Post
                         </button>
-    
+
                         <img v-bind:src="heartImage[index]" class="heartStyle">
 
-                        <button class='btn' v-on:click="commentPost(index)" style="margin-left: 175px; margin-bottom: 10px;">
+                        <button class='btn' v-on:click="commentPost(index)"
+                            style="margin-left: 175px; margin-bottom: 10px;">
                             Comment on {{person.username}}'s Post
                         </button>
 
@@ -220,8 +212,8 @@
 
 
                 <div v-show="Comment[index]" class='commentBox'>
-                    Type Comment: 
-                    <input type="text" v-model= "user_comment" style='width: 500px'>
+                    Type Comment:
+                    <input type="text" v-model="user_comment" style='width: 500px'>
 
                     <button class='btn-primary' v-on:click="postComment(index)">
                         Post!
@@ -273,5 +265,101 @@
 
 </body>
 
+<!-- ======================================================================= -->
 
 </html>
+<h2>Run Blue</h2>
+</div>
+</div>
+</nav>
+
+<!-- Sign In -->
+<div class="container" v-show="showSignIn">
+    <h3>Sign In</h3>
+    <div class="form-group">
+        <label for="username_input">Username or Email</label>
+        <input type="email" class="form-control" id="username_input" aria-describedby="emailHelp"
+            placeholder="Enter username or email">
+    </div>
+    <div class="form-group">
+        <label for="password_input">Password</label>
+        <input type="password" class="form-control" id="password_input" placeholder="Password">
+    </div>
+    <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="keep_me_singed_in_check">
+        <label class="form-check-label" for="keep_me_singed_in_check">Keep me signed in</label>
+    </div>
+    <button type="submit" class="btn btn-primary sign-in-button">Submit</button>
+    <button type="button" class="btn btn-warning sign-in-button">Create Account</button>
+
+</div>
+
+<!-- Create Account -->
+<div class="container" v-show="showCreateAccount">
+    <h3>Create Account</h3>
+    <div class="form-group">
+        <label for="first_name_input">First Name</label>
+        <input type="text" class="form-control" id="first_name_input">
+    </div>
+    <div class="form-group">
+        <label for="last_name_input">Last Name</label>
+        <input type="text" class="form-control" id="last_name_input">
+    </div>
+    <div class="form-group">
+        <label for="email_input">Email address</label>
+        <input type="email" class="form-control" id="email_input" aria-describedby="emailHelp">
+    </div>
+    <div class="form-group">
+        <label for="password_input">Password</label>
+        <input type="password" class="form-control" id="new_password_input">
+    </div>
+    <div class="form-group">
+        <label for="repeat_password_input">Repeat Password</label>
+        <input type="password" class="form-control" id="repeat_password_input">
+    </div>
+    <button type="submit" class="btn btn-primary sign-in-button">Create Account</button>
+</div>
+
+<!-- Feed -->
+<div class="container" v-show="showFeed">
+</div>
+
+<!-- Make a Post -->
+<div class="container" v-show="showMakeAPost">
+    <h3>Make a Post</h3>
+    <div class="form-group">
+        <label for="title_input">Title</label>
+        <input type="text" class="form-control" id="title_input">
+    </div>
+    <div class="form-group">
+        <label for="description_input">Description</label>
+        <textarea class="form-control" id="description_input"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="distance_input">Distance</label>
+        <input type="text" class="form-control" id="distance_input">
+    </div>
+    <div class="form-group">
+        <label for="time_input">Time</label>
+        <input type="text" class="form-control" id="time_input">
+    </div>
+    <div class="form-group">
+        <label for="image_upload">Image Upload</label>
+        <input type="file" class="form-control" id="image_upload" multiple accept="image/*">
+    </div>
+    <button type="submit" class="btn btn-primary sign-in-button">Post!</button>
+</div>
+
+<!-- Leaderboard -->
+<div class="container" v-show="showLeaderboard">
+    <h3>Leaderboard</h3>
+</div>
+
+<!-- Profile -->
+<div class="container" v-show="showProfile">
+    <h3>Profile</h3>
+</div>
+
+
+</div>
+</body>
