@@ -3,10 +3,10 @@
 var app_view = new Vue({
     el: '#app',
     data: {
-        showSignIn: false,
+        showSignIn: true,
         showCreateAccount: false,
         showFeed: false,
-        showMakeAPost: true,
+        showMakeAPost: false,
         showLeaderboard: false,
         showProfile: false,
 
@@ -19,6 +19,7 @@ var app_view = new Vue({
 
         username: '',
         password: '',
+        keep_me_signed_in: false,
         first_name: '',
         last_name: '',
         new_username: '',
@@ -29,13 +30,13 @@ var app_view = new Vue({
         Normal: "btn-primary",
 
         //HARD CODED FEED DATA
-        feedArray: [{"username": "john", "runIMG": "./johnrunning.jpeg", "Caption": "1 mile run", "Distance" : "1 mile", "Time": "30 minutes", "Date": "10/3/10", "Comments": "{'username': 'susan', 'comment': 'what a great run today!'}"}, { "username": "jack", "runIMG": "./jackrunning.jpeg", "Caption": "2 mile run", "Distance" : "2 mile", "Time": "20 minutes","Date": "10/10/10","Caption": "1 mile run", "Distance" : "1 mile", "Time": "30 minutes", "Date": "10/3/10", "Comments": "{'username': 'sam', 'comment': 'awesome!'}" }, {"username": "jill", "runIMG": "./jillrunning.jpeg", "Caption": "3 mile run", "Distance" : "3 mile", "Time": "60 minutes","Date": "10/3/21","Caption": "1 mile run", "Distance" : "1 mile", "Time": "30 minutes", "Date": "10/3/10", "Comments": "{'username': 'sara', 'comment': 'lookin' good!'}"  }],
+        feedArray: [{ "username": "john", "runIMG": "./johnrunning.jpeg", "Caption": "1 mile run", "Distance": "1 mile", "Time": "30 minutes", "Date": "10/3/10", "Comments": "{'username': 'susan', 'comment': 'what a great run today!'}" }, { "username": "jack", "runIMG": "./jackrunning.jpeg", "Caption": "2 mile run", "Distance": "2 mile", "Time": "20 minutes", "Date": "10/10/10", "Caption": "1 mile run", "Distance": "1 mile", "Time": "30 minutes", "Date": "10/3/10", "Comments": "{'username': 'sam', 'comment': 'awesome!'}" }, { "username": "jill", "runIMG": "./jillrunning.jpeg", "Caption": "3 mile run", "Distance": "3 mile", "Time": "60 minutes", "Date": "10/3/21", "Caption": "1 mile run", "Distance": "1 mile", "Time": "30 minutes", "Date": "10/3/10", "Comments": "{'username': 'sara', 'comment': 'lookin' good!'}" }],
 
-        heartImage: ['./heartNOFill.png','./heartNOFill.png','./heartNOFill.png'],
+        heartImage: ['./heartNOFill.png', './heartNOFill.png', './heartNOFill.png'],
         noFillHeart: "./heartNOFill.png",
         heartFill: "./heartFill.png",
 
-        postLiked: [false,false,false],
+        postLiked: [false, false, false],
 
         Comment: [false, false, false],
 
@@ -49,17 +50,17 @@ var app_view = new Vue({
     methods: {
 
         //called when the profile button is clicked
-        profileClick: function(event){
+        profileClick: function (event) {
 
             //if the profile is currently being shown close it
-            if(this.showProfile){
+            if (this.showProfile) {
                 this.showProfile = false;
                 //show the feed
                 this.showFeed = true;
                 this.showNavbar = true;
 
             }
-            else{
+            else {
                 //open the profile screen
                 //hide and show the things we need and dont
                 this.showProfile = true;
@@ -74,7 +75,7 @@ var app_view = new Vue({
         }, //end profileClick function
 
         //called when user clicks sign in button
-        signInButton: function(event){
+        signInButton: function (event) {
 
             //CHECK WITH THE API IF THERE LOG IN IS CORRECT
             /*if(username wrong){
@@ -91,7 +92,7 @@ var app_view = new Vue({
         },//end sign in button function
 
         //called when user clicks create account button
-        createAccountButton: function(event){
+        createAccountButton: function (event) {
 
             //first go to create an account screen
             this.showSignIn = false;
@@ -99,15 +100,15 @@ var app_view = new Vue({
         },//end create account button
 
         //calls when they create the accout
-        createAccountButton_2: function(event){
+        createAccountButton_2: function (event) {
 
             //first check that the password is the same
-            if(this.new_password != this.new_password_2){
+            if (this.new_password != this.new_password_2) {
                 alert("Passwords do not match please try again");
                 return;
             }
 
-            else{
+            else {
 
                 //call to api to get the account created
 
@@ -123,14 +124,14 @@ var app_view = new Vue({
 
         },
 
-        feedClick: function(event){
+        feedClick: function (event) {
             this.showFeed = true;
             this.showMakeAPost = false;
             this.showLeaderboard = false;
             this.showProfile = false;
 
         },
-        makeAPostClick: function(event){
+        makeAPostClick: function (event) {
             this.showFeed = false;
             this.showMakeAPost = true;
             this.showLeaderboard = false;
@@ -138,7 +139,7 @@ var app_view = new Vue({
 
 
         },
-        leaderboardClick: function(event){
+        leaderboardClick: function (event) {
             this.showFeed = false;
             this.showLeaderboard = true;
             this.showMakeAPost = false;
@@ -146,25 +147,25 @@ var app_view = new Vue({
 
         },
 
-        showComments: function(index){
+        showComments: function (index) {
 
-            if(this.showCommentsBox[index] == false){
+            if (this.showCommentsBox[index] == false) {
                 this.$set(this.showCommentsBox, index, true);
             }
-            else{
+            else {
                 this.$set(this.showCommentsBox, index, false);
             }
 
 
         },
 
-        likePost: function(index){
+        likePost: function (index) {
             //post is not liked so like the post
-            if(this.postLiked[index] == false){
+            if (this.postLiked[index] == false) {
                 this.postLiked[index] = true;
                 this.$set(this.heartImage, index, this.heartFill);
             }
-            else{
+            else {
                 this.postLiked[index] = false;
                 this.heartImage[index] = this.noFillHeart;
                 this.$set(this.heartImage, index, this.noFillHeart);
@@ -173,19 +174,19 @@ var app_view = new Vue({
 
         },
 
-        commentPost: function(index){
-        
-            if(this.Comment[index] == false){
+        commentPost: function (index) {
+
+            if (this.Comment[index] == false) {
                 this.$set(this.Comment, index, true);
             }
-            else{
-                this.$set(this.Comment,index, false);
+            else {
+                this.$set(this.Comment, index, false);
             }
 
 
         },
 
-        postComment: function(index){
+        postComment: function (index) {
 
             //add the comment to the comment box
             //set to the index of the input which is user_comment
@@ -199,7 +200,7 @@ var app_view = new Vue({
 
 
     },
-    
+
     computed: {
 
     },
