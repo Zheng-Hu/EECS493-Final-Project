@@ -1,8 +1,8 @@
 var app_view = new Vue({
     el: '#app',
     data: {
-        showSignIn: true,
-        showCreateAccount: false,
+        showSignIn: false,
+        showCreateAccount: true,
         showFeed: false,
         showMakeAPost: false,
         showLeaderboard: false,

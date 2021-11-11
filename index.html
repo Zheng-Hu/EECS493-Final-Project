@@ -23,52 +23,68 @@
     </title>
 </head>
 
-<body id="app">
-    <!-- Header -->
-    <nav class="navbar navbar-default">
-        <div class="container">
-            <div class="navbar-header">
-                <h3>Run Blue</h3>
+<body>
+    <div id="app">
+        <!-- Header -->
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <h3>Run Blue</h3>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
 
-    <!-- Sign In -->
-    <div class="container" v-show="showSignIn">
+        <!-- Sign In -->
+        <div class="container" v-show="showSignIn">
 
-        <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                placeholder="Enter email">
+            <div class="form-group">
+                <label for="username_input">Username or Email</label>
+                <input type="email" class="form-control" id="username_input" aria-describedby="emailHelp"
+                    placeholder="Enter username or email">
+            </div>
+            <div class="form-group">
+                <label for="password_input">Password</label>
+                <input type="password" class="form-control" id="password_input" placeholder="Password">
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="keep_me_singed_in_check">
+                <label class="form-check-label" for="keep_me_singed_in_check">Keep me signed in</label>
+            </div>
+            <button type="submit" class="btn btn-primary sign-in-button">Submit</button>
+            <button type="button" class="btn btn-warning sign-in-button">Create Account</button>
+
         </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+
+        <!-- Create Account -->
+        <div class="container" v-show="showCreateAccount">
+            <div class="form-group">
+                <label for="email_input">Email address</label>
+                <input type="email" class="form-control" id="email_input" aria-describedby="emailHelp">
+            </div>
+            <div class="form-group">
+                <label for="password_input">Password</label>
+                <input type="password" class="form-control" id="password_input">
+            </div>
+            <div class="form-group">
+                <label for="repeat_password_input">Repeat Password</label>
+                <input type="password" class="form-control" id="repeat_password_input">
+            </div>
+            <button type="submit" class="btn btn-primary sign-in-button">Create Account</button>
         </div>
-        <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">Keep me signed in</label>
+
+        <!-- Feed -->
+        <div class="container" v-show="showFeed">
         </div>
-        <button type="submit" class="btn btn-primary sign-in-button">Submit</button>
-        <button type="submit" class="btn btn-warning sign-in-button">Create Account</button>
+
+        <!-- Make a Post -->
+        <div class="container" v-show="showMakeAPost"></div>
+
+        <!-- Leaderboard -->
+        <div class="container" v-show="showLeaderboard"></div>
+
+        <!-- Profile -->
+        <div class="container" v-show="showProfile"></div>
+
 
     </div>
-
-    <!-- Create Account -->
-    <div class="container" v-show="showCreateAccount"></div>
-
-    <!-- Feed -->
-    <div class="container" v-show="showFeed"></div>
-
-    <!-- Make a Post -->
-    <div class="container" v-show="showMakeAPost"></div>
-
-    <!-- Leaderboard -->
-    <div class="container" v-show="showLeaderboard"></div>
-
-    <!-- Profile -->
-    <div class="container" v-show="showProfile"></div>
-
-
-
 </body>
