@@ -39,7 +39,7 @@
                     </li>
 
                     <li class="nav-item active profileBtn" v-show="noProfile">
-                        <button :class='showProfile ? Success: Normal' v-on:click="profileClick" style="height: 50px;">
+                        <button :class='showProfile ? Success: Normal' class='btn sign-in-button' v-on:click="profileClick" style="height: 50px;">
                             {{Profile}} </button>
                     </li>
 
@@ -49,7 +49,7 @@
 
 
         <!-- NAVBAR -->
-        <div v-show='showNavbar' style="margin-top: -25px;">
+        <div v-show='showNavbar' style="top: 0px; margin-top: -25px; position: sticky;">
             <nav class="navbar navbar-default">
                 <div class="container">
                     <div class="row">
@@ -58,17 +58,17 @@
                         <ul class="navbar-nav mr-auto" style="list-style: none;">
 
                             <li class="nav-item active" style="margin-left: 200px;">
-                                <button :class='showMakeAPost ? Success: Normal' v-on:click="makeAPostClick"
-                                    style="height: 50px; width: 100px;"> Make A Post </button>
+                                <button :class='showMakeAPost ? Success: Normal' class='btn sign-in-button' v-on:click="makeAPostClick"
+                                    style="height: 50px; width: 100px; margin-bottom: 5px;"> Make A Post </button>
                             </li>
 
                             <li class="nav-item active" style="margin-left: 200px;">
-                                <button :class="showFeed ? Success: Normal" v-on:click="feedClick"
-                                    style="height: 50px; width: 100px;"> Feed</button>
+                                <button :class="showFeed ? Success: Normal"  class='btn sign-in-button' v-on:click="feedClick"
+                                    style="height: 50px; width: 100px; margin-bottom: 5px;"> Feed</button>
                             </li>
                             <li class="nav-item active" style="margin-left: 200px;">
-                                <button :class="showLeaderboard ? Success: Normal" v-on:click="leaderboardClick"
-                                    style="height: 50px; width: 100px;"> Leaderboard</button>
+                                <button :class="showLeaderboard ? Success: Normal" class='btn sign-in-button' v-on:click="leaderboardClick"
+                                    style="height: 50px; width: 100px; margin-bottom: 5px;"> Leaderboard</button>
                             </li>
                         </ul>
 
@@ -260,7 +260,36 @@
 
         <!-- Profile -->
         <div class="container" v-show="showProfile">
-            This is the profile screen
+            
+            <div class="container-fluid" id='profile-header'>
+                My Run<span style="color: blue;">Blue</span> Profile
+            </div>
+
+            <div class='container-fluid' id='profile-pic-cont'>
+                Profile Image here
+                
+            </div>
+
+            <div class='container-fluid' id='profile-content'>
+                <ul style="list-style: none;">
+                    <li style="padding-top: 5px;">
+                        Username:
+                    </li>
+                    <li style="padding-top: 5px;">
+                        Bio:
+                    </li>
+                    <li style="padding-top: 5px;">
+                        Total Distance Logged:
+                    </li>
+                    <li style="padding-top: 5px;">
+                        Total Time Logged:
+                    </li>
+                </ul>
+            </div>
+
+
+            
+
         </div>
 
 
