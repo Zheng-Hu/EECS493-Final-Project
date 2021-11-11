@@ -29,14 +29,14 @@
         <nav class="navbar navbar-default">
             <div class="container">
                 <div class="navbar-header">
-                    <h3>Run Blue</h3>
+                    <h2>Run Blue</h2>
                 </div>
             </div>
         </nav>
 
         <!-- Sign In -->
         <div class="container" v-show="showSignIn">
-
+            <h3>Sign In</h3>
             <div class="form-group">
                 <label for="username_input">Username or Email</label>
                 <input type="email" class="form-control" id="username_input" aria-describedby="emailHelp"
@@ -57,13 +57,22 @@
 
         <!-- Create Account -->
         <div class="container" v-show="showCreateAccount">
+            <h3>Create Account</h3>
+            <div class="form-group">
+                <label for="first_name_input">First Name</label>
+                <input type="text" class="form-control" id="first_name_input">
+            </div>
+            <div class="form-group">
+                <label for="last_name_input">Last Name</label>
+                <input type="text" class="form-control" id="last_name_input">
+            </div>
             <div class="form-group">
                 <label for="email_input">Email address</label>
                 <input type="email" class="form-control" id="email_input" aria-describedby="emailHelp">
             </div>
             <div class="form-group">
                 <label for="password_input">Password</label>
-                <input type="password" class="form-control" id="password_input">
+                <input type="password" class="form-control" id="new_password_input">
             </div>
             <div class="form-group">
                 <label for="repeat_password_input">Repeat Password</label>
@@ -77,13 +86,40 @@
         </div>
 
         <!-- Make a Post -->
-        <div class="container" v-show="showMakeAPost"></div>
+        <div class="container" v-show="showMakeAPost">
+            <h3>Make a Post</h3>
+            <div class="form-group">
+                <label for="title_input">Title</label>
+                <input type="text" class="form-control" id="title_input">
+            </div>
+            <div class="form-group">
+                <label for="description_input">Description</label>
+                <textarea class="form-control" id="description_input"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="distance_input">Distance</label>
+                <input type="text" class="form-control" id="distance_input">
+            </div>
+            <div class="form-group">
+                <label for="time_input">Time</label>
+                <input type="text" class="form-control" id="time_input">
+            </div>
+            <div class="form-group">
+                <label for="image_upload">Image Upload</label>
+                <input type="file" class="form-control" id="image_upload" multiple accept="image/*">
+            </div>
+            <button type="submit" class="btn btn-primary sign-in-button">Post!</button>
+        </div>
 
         <!-- Leaderboard -->
-        <div class="container" v-show="showLeaderboard"></div>
+        <div class="container" v-show="showLeaderboard">
+            <h3>Leaderboard</h3>
+        </div>
 
         <!-- Profile -->
-        <div class="container" v-show="showProfile"></div>
+        <div class="container" v-show="showProfile">
+            <h3>Profile</h3>
+        </div>
 
 
     </div>

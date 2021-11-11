@@ -1,6 +1,10 @@
 body {
 }
 
-input {
-    
+h3 {
+    margin-bottom: 25px;
+}
+
+textarea {
+    height: 15vh;
 }
