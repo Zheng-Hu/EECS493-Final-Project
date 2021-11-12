@@ -1,20 +1,20 @@
 #!/bin/bash
-#insta485run
+#RunBlue
 
 
 set -Eeuo pipefail
 
 
-# Call insta485db create if the database file does not exist
+# Call RunBluedb create if the database file does not exist
 
-if [ ! -f 'var/insta485.sqlite3' ]; then
- ./bin/insta485db create
+if [ ! -f 'var/RunBlue.sqlite3' ]; then
+ ./bin/RunBluedb create
 fi
 
 # Set FLASK_ENV and FLASK_APP environment variables
 
 export FLASK_ENV=development
-export FLASK_APP=insta485
+export FLASK_APP=RunBlue
 
 # Run the development server on port 8000
 
