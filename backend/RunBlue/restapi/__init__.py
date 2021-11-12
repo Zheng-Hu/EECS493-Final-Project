@@ -1,3 +1,3 @@
 """RunBlue REST API."""
 
-from restapi.posts import *
+from RunBlue.restapi.posts import *

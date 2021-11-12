@@ -18,27 +18,27 @@ fi
 # Parse argument.  $1 is the first argument
 case $1 in
   "create")
-    mkdir -p backend/var/uploads
-    sqlite3 backend/var/RunBlue.sqlite3 < backend/sql/schema.sql
-    sqlite3 backend/var/RunBlue.sqlite3 < backend/sql/data.sql
-    cp backend/sql/uploads/* backend/var/uploads
+    mkdir -p var/uploads
+    sqlite3 var/RunBlue.sqlite3 < sql/schema.sql
+    sqlite3 var/RunBlue.sqlite3 < sql/data.sql
+    cp sql/uploads/* var/uploads
     ;;
 
   "destroy")
-    rm -rf backend/var/RunBlue.sqlite3 backend/var/uploads
+    rm -rf var/RunBlue.sqlite3 var/uploads
     ;;
 
   "reset")
-    rm -rf backend/var/RunBlue.sqlite3 backend/var/uploads
-    mkdir -p backend/var/uploads
-    sqlite3 backend/var/RunBlue.sqlite3 < backend/sql/schema.sql
-    sqlite3 backend/var/RunBlue.sqlite3 < backend/sql/data.sql
-    cp backend/sql/uploads/* backend/var/uploads
+    rm -rf var/RunBlue.sqlite3 var/uploads
+    mkdir -p var/uploads
+    sqlite3 var/RunBlue.sqlite3 < sql/schema.sql
+    sqlite3 var/RunBlue.sqlite3 < sql/data.sql
+    cp sql/uploads/* var/uploads
     ;;
 
   "dump")
-    sqlite3 -batch -line backend/var/RunBlue.sqlite3 'SELECT * FROM posts'
-    sqlite3 -batch -line backend/var/RunBlue.sqlite3 'SELECT * FROM users'
+    sqlite3 -batch -line var/RunBlue.sqlite3 'SELECT * FROM posts'
+    sqlite3 -batch -line var/RunBlue.sqlite3 'SELECT * FROM users'
     ;;
   *)
     usage

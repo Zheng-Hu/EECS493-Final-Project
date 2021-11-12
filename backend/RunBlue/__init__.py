@@ -1,5 +1,4 @@
 """RunBlue package initializer."""
-
 import flask
 
 # app is a single object used by all the code modules in this package
@@ -20,6 +19,5 @@ app.config.from_envvar('RunBlue_SETTINGS', silent=True)
 # circular import, which is naughty, but Flask was designed that way.
 # (Reference http://flask.pocoo.org/docs/patterns/packages/)  We're
 # going to tell pylint and pycodestyle to ignore this coding style violation.
-import RunBlue.views  # noqa: E402  pylint: disable=wrong-import-position
+import RunBlue.restapi  # noqa: E402  pylint: disable=wrong-import-position
 import RunBlue.model  # noqa: E402  pylint: disable=wrong-import-position
-import RunBlue.api  # noqa: E402  pylint: disable=wrong-import-position

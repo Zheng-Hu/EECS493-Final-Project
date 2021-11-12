@@ -8,7 +8,7 @@ set -Eeuo pipefail
 # Call RunBluedb create if the database file does not exist
 
 if [ ! -f 'var/RunBlue.sqlite3' ]; then
- ./bin/RunBluedb create
+ backend/bin/RunBluedb create
 fi
 
 # Set FLASK_ENV and FLASK_APP environment variables
