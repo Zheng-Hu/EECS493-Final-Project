@@ -3,16 +3,22 @@
 var app_view = new Vue({
     el: '#app',
     data: {
-        showSignIn: false,
+        showSignIn: true,
         showCreateAccount: false,
         showFeed: false,
         showMakeAPost: false,
-        showLeaderboard: true,
+        showLeaderboard: false,
         showProfile: false,
 
         showNavbar: false,
-
         noProfile: false,
+
+        leaderboard: {
+            sort_by: ["Name", "Distance", "Time", "Date"],
+            sort_by_idx: 3,
+            filter_by: ["Today", "Last Week", "Last Month", "Last 3 Months", "Last Year", "All Time"],
+            filter_by_idx: 5,
+        },
 
 
         Profile: "Profile",
@@ -193,11 +199,27 @@ var app_view = new Vue({
 
             this.$set(this.Comment, index, false);
 
-        }
+        },
 
 
+        // Leaderboard
+        get_sort_dropdown_class: function (idx) {
+            if (idx == this.leaderboard.sort_by_idx) return "active";
+            return "";
+        },
 
+        on_sort_dropdown_click: function (idx) {
+            this.leaderboard.sort_by_idx = idx;
+        },
 
+        get_filter_dropdown_class: function (idx) {
+            if (idx == this.leaderboard.filter_by_idx) return "active";
+            return "";
+        },
+
+        on_filter_dropdown_click: function (idx) {
+            this.leaderboard.filter_by_idx = idx;
+        },
 
     },
 
@@ -208,7 +230,7 @@ var app_view = new Vue({
             for (let i = 0; i < 10; i++) {
                 let row = {
                     name: 'Jack Jackson',
-                    distance: 3.14,
+                    distance: 2 + (i * 0.25),
                     time: "20:13",
                     date: "10/11/2021"
                 };

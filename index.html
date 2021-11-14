@@ -247,7 +247,66 @@
         </div>
 
         <!-- Leaderboard -->
+        <br>
         <div class="container" v-show="showLeaderboard">
+            <div class="row-no-gutters">
+                <div class="col-md-2">
+                    <h4>Sort By:</h4>
+                </div>
+                <div class="col-md-2">
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                            {{leaderboard.sort_by[leaderboard.sort_by_idx]}}
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li :class="get_sort_dropdown_class(0)" v-on:click="on_sort_dropdown_click(0)">
+                                <a href="#">Name</a>
+                            </li>
+                            <li :class="get_sort_dropdown_class(1)" v-on:click="on_sort_dropdown_click(1)">
+                                <a href="#">Distance</a>
+                            </li>
+                            <li :class="get_sort_dropdown_class(2)" v-on:click="on_sort_dropdown_click(2)">
+                                <a href="#">Time</a>
+                            </li>
+                            <li :class="get_sort_dropdown_class(3)" v-on:click="on_sort_dropdown_click(3)">
+                                <a href="#">Date</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-2 flex-nowrap">
+                    <h4>Filter By:</h4>
+                </div>
+                <div class="col-md-2">
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                            <!-- {{leaderboard.filter_by[leaderboard.filter_by_idx]}} -->
+                            {{leaderboard.filter_by[leaderboard.filter_by_idx]}}
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li :class="get_filter_dropdown_class(0)" v-on:click="on_filter_dropdown_click(0)">
+                                <a href="#">Today</a>
+                            </li>
+                            <li :class="get_filter_dropdown_class(1)" v-on:click="on_filter_dropdown_click(1)"><a
+                                    href="#">Last Week</a></li>
+                            <li :class="get_filter_dropdown_class(2)" v-on:click="on_filter_dropdown_click(2)"><a
+                                    href="#">Last Month</a></li>
+                            <li :class="get_filter_dropdown_class(3)" v-on:click="on_filter_dropdown_click(3)"><a
+                                    href="#">Last 3 Months</a></li>
+                            <li :class="get_filter_dropdown_class(4)" v-on:click="on_filter_dropdown_click(4)"><a
+                                    href="#">Last Year</a></li>
+                            <li :class="get_filter_dropdown_class(5)" v-on:click="on_filter_dropdown_click(5)"><a
+                                    href="#">All Time</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+
+            </div>
+            <br>
             <table class="table">
                 <thead>
                     <tr>
