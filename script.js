@@ -202,7 +202,20 @@ var app_view = new Vue({
     },
 
     computed: {
+        create_leaderboard: function () {
+            leaderboard = [];
 
+            for (let i = 0; i < 10; i++) {
+                let row = {
+                    name: 'firstname lastname',
+                    distance: 3.14,
+                    time: "20:13",
+                    date: "10/11/2021"
+                };
+
+                leaderboard.push(row);
+            }
+        }
     },
 
     mounted() {
