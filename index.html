@@ -39,7 +39,8 @@
                     </li>
 
                     <li class="nav-item active profileBtn" v-show="noProfile">
-                        <button :class='showProfile ? Success: Normal' class='btn sign-in-button' v-on:click="profileClick" style="height: 50px;">
+                        <button :class='showProfile ? Success: Normal' class='btn sign-in-button'
+                            v-on:click="profileClick" style="height: 50px;">
                             {{Profile}} </button>
                     </li>
 
@@ -58,16 +59,19 @@
                         <ul class="navbar-nav mr-auto" style="list-style: none;">
 
                             <li class="nav-item active" style="margin-left: 200px;">
-                                <button :class='showMakeAPost ? Success: Normal' class='btn sign-in-button' v-on:click="makeAPostClick"
-                                    style="height: 50px; width: 100px; margin-bottom: 5px;"> Make A Post </button>
+                                <button :class='showMakeAPost ? Success: Normal' class='btn sign-in-button'
+                                    v-on:click="makeAPostClick" style="height: 50px; width: 100px; margin-bottom: 5px;">
+                                    Make A Post </button>
                             </li>
 
                             <li class="nav-item active" style="margin-left: 200px;">
-                                <button :class="showFeed ? Success: Normal"  class='btn sign-in-button' v-on:click="feedClick"
-                                    style="height: 50px; width: 100px; margin-bottom: 5px;"> Feed</button>
+                                <button :class="showFeed ? Success: Normal" class='btn sign-in-button'
+                                    v-on:click="feedClick" style="height: 50px; width: 100px; margin-bottom: 5px;">
+                                    Feed</button>
                             </li>
                             <li class="nav-item active" style="margin-left: 200px;">
-                                <button :class="showLeaderboard ? Success: Normal" class='btn sign-in-button' v-on:click="leaderboardClick"
+                                <button :class="showLeaderboard ? Success: Normal" class='btn sign-in-button'
+                                    v-on:click="leaderboardClick"
                                     style="height: 50px; width: 100px; margin-bottom: 5px;"> Leaderboard</button>
                             </li>
                         </ul>
@@ -214,19 +218,6 @@
 
             </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
         </div>
 
         <!-- Make a Post -->
@@ -256,18 +247,37 @@
         </div>
 
         <!-- Leaderboard -->
-        <div class="container" v-show="showLeaderboard"></div>
+        <div class="container" v-show="showLeaderboard">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Distance</th>
+                        <th scope="col">Time</th>
+                        <th scope="col">Date</th>
+                    </tr>
+                </thead>
+                <tbody v-for="entry in create_leaderboard">
+                    <tr>
+                        <th scope="row">{{entry.name}}</th>
+                        <td>{{entry.distance}}</td>
+                        <td>{{entry.time}}</td>
+                        <td>{{entry.date}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
         <!-- Profile -->
         <div class="container" v-show="showProfile">
-            
+
             <div class="container-fluid" id='profile-header'>
                 My Run<span style="color: blue;">Blue</span> Profile
             </div>
 
             <div class='container-fluid' id='profile-pic-cont'>
                 Profile Image here
-                
+
             </div>
 
             <div class='container-fluid' id='profile-content'>
@@ -288,7 +298,7 @@
             </div>
 
 
-            
+
 
         </div>
 

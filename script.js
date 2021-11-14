@@ -3,11 +3,11 @@
 var app_view = new Vue({
     el: '#app',
     data: {
-        showSignIn: true,
+        showSignIn: false,
         showCreateAccount: false,
         showFeed: false,
         showMakeAPost: false,
-        showLeaderboard: false,
+        showLeaderboard: true,
         showProfile: false,
 
         showNavbar: false,
@@ -207,7 +207,7 @@ var app_view = new Vue({
 
             for (let i = 0; i < 10; i++) {
                 let row = {
-                    name: 'firstname lastname',
+                    name: 'Jack Jackson',
                     distance: 3.14,
                     time: "20:13",
                     date: "10/11/2021"
@@ -215,6 +215,8 @@ var app_view = new Vue({
 
                 leaderboard.push(row);
             }
+
+            return leaderboard;
         }
     },
 
