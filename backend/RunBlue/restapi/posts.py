@@ -12,8 +12,36 @@ from flask import jsonify,request
 import runblue
 
 
-@runblue.app.route('/api/v1/posts/', methods =["GET"])
+@runblue.app.route('/api/v1/posts/', methods =("GET", "POST"))
 def posts():
+    # Get db connection
+    cur = runblue.model.get_db()
+
+    # Check for post upload
+    if request.method == 'POST':
+        request_data = request.get_json()
+
+        # Compute the filename and store it
+        filename = "testfilename.jpeg"
+
+        # Insert into posts table
+        cur.execute(
+            "INSERT INTO posts (postid, filename, caption, created, owner) VALUES (DEFAULT, %s, %s, DEFAULT, %s) RETURNING postid",
+            (filename, request_data["caption"], request_data["owner"])
+        )
+
+        # Retrieve the id of the post created
+        created_postid = cur.fetchone()["postid"]
+
+        # Insert into the workouts table
+        cur.execute(
+            "INSERT INTO workouts(workoutid, time, distance, created, owner, postid) VALUES (DEFAULT, %s, %s, DEFAULT, %s, %s)",
+            (request_data["time"], request_data["distance"], request_data["owner"], created_postid)
+        )
+
+        # Return created response
+        return runblue.error_code("Post created", 201)
+
     # Get the username, if provided
     username = request.args.get("user")
         
@@ -21,9 +49,6 @@ def posts():
     context = {
         "url": "/api/v1/posts/"
     }
-
-    # Get db connection
-    cur = runblue.model.get_db()
 
     # Retrieve posts from database
     if (username):
