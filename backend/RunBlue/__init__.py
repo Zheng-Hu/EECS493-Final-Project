@@ -11,6 +11,26 @@ app.config.from_object('runblue.config')
 import runblue.restapi
 import runblue.model
 
+
+# Check if a user exists in the database
+def check_no_user(username: str) -> bool:
+    """Check if username doesn't exist in users table."""
+    cur = runblue.model.get_db()
+    cur.execute(
+        "SELECT * FROM users WHERE username = %s",
+        (username,)
+    )
+
+    return cur.fetchone() == None
+
+# Returning error codes
+def error_code(message, status_code):
+    """Return the error with JSON and error code."""
+    error = {}
+    error["message"] = message
+    error["status_code"] = status_code
+    return flask.jsonify(**error), status_code
+
 # Serve image files to the frontend
 @app.route('/media/<path:filename>', methods=["GET"])
 def get_image(filename):

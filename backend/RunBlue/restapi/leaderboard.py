@@ -7,7 +7,6 @@ URLS include:
 /api/v1/leaderboard/?user=      [GET]
 """
 
-import flask
 from flask import jsonify, request
 import runblue
 
@@ -27,6 +26,10 @@ def get_leaderboard():
 
     # Retrieve leaderboard from database
     if (username):
+        if runblue.check_no_user(username):
+            return runblue.error_code("User could not be found.", 404)
+
+        # Get the user's leaderboard
         cur.execute(
             "SELECT distance, owner, time, workoutid FROM workouts WHERE owner = %s LIMIT 10",
             (username,)
@@ -40,8 +43,8 @@ def get_leaderboard():
 
     # Sort by per-mile time
     for workout in context["data"]:
-        workout["perMileTime"] = workout["time"] / workout["distance"]
+        workout["permiletime"] = workout["time"] / workout["distance"]
 
-    context["data"] = sorted(context["data"], key=lambda i: i["perMileTime"])
+    context["data"] = sorted(context["data"], key=lambda i: i["permiletime"])
     
-    return flask.jsonify(**context)
+    return jsonify(**context)
