@@ -1,5 +1,3 @@
-
-
 var app_view = new Vue({
     el: '#app',
     data: {
