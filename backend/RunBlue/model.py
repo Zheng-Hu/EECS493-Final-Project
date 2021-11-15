@@ -1,9 +1,9 @@
-"""RunBlue model (database) API."""
+"""runblue model (database) API."""
 import os
 import flask
 import psycopg2
 import psycopg2.extras
-import RunBlue
+import runblue
 
 
 def get_db():
@@ -11,12 +11,12 @@ def get_db():
     if "db_con" not in flask.g:
         flask.g.db_con = psycopg2.connect(
             host=os.getenv('POSTGRES_HOST'),
-            port=RunBlue.app.config['POSTGRESQL_DATABASE_PORT'],
-            user=RunBlue.app.config['POSTGRESQL_DATABASE_USER'],
+            port=runblue.app.config['POSTGRESQL_DATABASE_PORT'],
+            user=runblue.app.config['POSTGRESQL_DATABASE_USER'],
             # Uncomment to deploy to prod
             # password=os.getenv('POSTGRESQL_DATABASE_PASSWORD'),
-            password=RunBlue.app.config['POSTGRESQL_DATABASE_PASSWORD'],
-            database=RunBlue.app.config['POSTGRESQL_DATABASE_DB'],
+            password=runblue.app.config['POSTGRESQL_DATABASE_PASSWORD'],
+            database=runblue.app.config['POSTGRESQL_DATABASE_DB'],
         )
         flask.g.db_cur = flask.g.db_con.cursor(
             cursor_factory=psycopg2.extras.RealDictCursor
@@ -24,7 +24,7 @@ def get_db():
     return flask.g.db_cur
 
 
-@RunBlue.app.teardown_appcontext
+@runblue.app.teardown_appcontext
 def close_db(error):
     """Close the database at the end of a request."""
     assert error or not error  # Needed to avoid superfluous style error

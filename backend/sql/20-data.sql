@@ -19,6 +19,6 @@ VALUES
     (DEFAULT, 22.3, 3.2, DEFAULT, 'jill', 2),
     (DEFAULT, 18.1, 1.7, DEFAULT, 'jill', 5),
     (DEFAULT, 9.8, 1.1, DEFAULT, 'kevin', 4),
-    (DEFAULT, 52.3, 7.1, DEFAULT, 'jack'),
-    (DEFAULT, 19.0, 2.5, DEFAULT, 'jill'),
-    (DEFAULT, 12.1, 1.4, DEFAULT, 'kevin');
+    (DEFAULT, 52.3, 7.1, DEFAULT, 'jack', NULL),
+    (DEFAULT, 19.0, 2.5, DEFAULT, 'jill', NULL),
+    (DEFAULT, 12.1, 1.4, DEFAULT, 'kevin', NULL);
