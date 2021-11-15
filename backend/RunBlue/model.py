@@ -1,45 +1,36 @@
 """RunBlue model (database) API."""
-import sqlite3
+import os
 import flask
+import psycopg2
+import psycopg2.extras
 import RunBlue
 
 
-def dict_factory(cursor, row):
-    """Convert database row objects to a dictionary keyed on column name.
-
-    This is useful for building dictionaries which are then used to render a
-    template.  Note that this would be inefficient for large queries.
-    """
-    return {col[0]: row[idx] for idx, col in enumerate(cursor.description)}
-
-
 def get_db():
-    """Open a new database connection.
-
-    Flask docs:
-    https://flask.palletsprojects.com/en/1.0.x/appcontext/#storing-data
-    """
-    if 'sqlite_db' not in flask.g:
-        db_filename = RunBlue.app.config['DATABASE_FILENAME']
-        flask.g.sqlite_db = sqlite3.connect(str(db_filename))
-        flask.g.sqlite_db.row_factory = dict_factory
-
-        # Foreign keys have to be enabled per-connection.  This is an sqlite3
-        # backwards compatibility thing.
-        flask.g.sqlite_db.execute("PRAGMA foreign_keys = ON")
-
-    return flask.g.sqlite_db
+    """Open a new database connection."""
+    if "db_con" not in flask.g:
+        flask.g.db_con = psycopg2.connect(
+            host=os.getenv('POSTGRES_HOST'),
+            port=RunBlue.app.config['POSTGRESQL_DATABASE_PORT'],
+            user=RunBlue.app.config['POSTGRESQL_DATABASE_USER'],
+            # Uncomment to deploy to prod
+            # password=os.getenv('POSTGRESQL_DATABASE_PASSWORD'),
+            password=RunBlue.app.config['POSTGRESQL_DATABASE_PASSWORD'],
+            database=RunBlue.app.config['POSTGRESQL_DATABASE_DB'],
+        )
+        flask.g.db_cur = flask.g.db_con.cursor(
+            cursor_factory=psycopg2.extras.RealDictCursor
+        )
+    return flask.g.db_cur
 
 
 @RunBlue.app.teardown_appcontext
 def close_db(error):
-    """Close the database at the end of a request.
-
-    Flask docs:
-    https://flask.palletsprojects.com/en/1.0.x/appcontext/#storing-data
-    """
+    """Close the database at the end of a request."""
     assert error or not error  # Needed to avoid superfluous style error
-    sqlite_db = flask.g.pop('sqlite_db', None)
-    if sqlite_db is not None:
-        sqlite_db.commit()
-        sqlite_db.close()
+    db_cur = flask.g.pop('db_cur', None)
+    db_con = flask.g.pop('db_con', None)
+    if db_con is not None:
+        db_con.commit()
+        db_cur.close()
+        db_con.close()

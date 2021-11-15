@@ -7,17 +7,13 @@ app = flask.Flask(__name__)  # pylint: disable=invalid-name
 # Read settings from config module (RunBlue/config.py)
 app.config.from_object('RunBlue.config')
 
-# Overlay settings read from a Python file whose path is set in the environment
-# variable RunBlue_SETTINGS. Setting this environment variable is optional.
-# Docs: http://flask.pocoo.org/docs/latest/config/
-#
-# EXAMPLE:
-# $ export RunBlue_SETTINGS=secret_key_config.py
-app.config.from_envvar('RunBlue_SETTINGS', silent=True)
+# Tell the app about api and model
+import RunBlue.restapi
+import RunBlue.model
 
-# Tell our app about views and model.  This is dangerously close to a
-# circular import, which is naughty, but Flask was designed that way.
-# (Reference http://flask.pocoo.org/docs/patterns/packages/)  We're
-# going to tell pylint and pycodestyle to ignore this coding style violation.
-import RunBlue.restapi  # noqa: E402  pylint: disable=wrong-import-position
-import RunBlue.model  # noqa: E402  pylint: disable=wrong-import-position
+# Serve image files to the frontend
+@app.route('/media/<path:filename>', methods=["GET"])
+def get_image(filename):
+    """Return image requested."""
+    return flask.send_from_directory(str(app.config['MEDIA_FOLDER']), 
+                                     filename, as_attachment=True)
