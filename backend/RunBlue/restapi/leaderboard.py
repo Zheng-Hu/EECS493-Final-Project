@@ -13,6 +13,7 @@ import runblue
 
 @runblue.app.route('/api/v1/leaderboard/', methods=["GET"])
 def get_leaderboard():
+    """Endpoint to get the leaderboards."""
     # Get the username, if provided
     username = request.args.get("user")
     

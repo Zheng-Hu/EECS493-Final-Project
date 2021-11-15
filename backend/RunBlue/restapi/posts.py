@@ -10,37 +10,60 @@ URLS include:
 
 from flask import jsonify,request
 import runblue
+import uuid
+import pathlib
+import json
 
+@runblue.app.route('/api/v1/posts/', methods=["POST"])
+def upload_post():
+    """Endpoint to upload a post."""
+    # Get the file and filename
+    file = request.files['file']
+    filename = file.filename
 
-@runblue.app.route('/api/v1/posts/', methods =("GET", "POST"))
-def posts():
+    # Compute base name
+    uuid_basename = "{folder}{stem}{suffix}".format(
+        folder="/media/",
+        stem=uuid.uuid4().hex,
+        suffix=pathlib.Path(filename).suffix
+    )
+
+    # Save to disk
+    path = runblue.app.config["MEDIA_FOLDER"]/uuid_basename
+    file.save(path)
+
+    # Get form data
+    caption = request.form["caption"]
+    distance = request.form["distance"]
+    owner = request.form["owner"]
+    time = request.form["time"]
+
     # Get db connection
     cur = runblue.model.get_db()
 
-    # Check for post upload
-    if request.method == 'POST':
-        request_data = request.get_json()
+    # Insert into posts table
+    cur.execute(
+        "INSERT INTO posts (postid, filename, caption, created, owner) VALUES (DEFAULT, %s, %s, DEFAULT, %s) RETURNING postid",
+        (uuid_basename, caption, owner)
+    )
 
-        # Compute the filename and store it
-        filename = "testfilename.jpeg"
+    # Retrieve the id of the post created
+    created_postid = cur.fetchone()["postid"]
 
-        # Insert into posts table
-        cur.execute(
-            "INSERT INTO posts (postid, filename, caption, created, owner) VALUES (DEFAULT, %s, %s, DEFAULT, %s) RETURNING postid",
-            (filename, request_data["caption"], request_data["owner"])
-        )
+    # Insert into the workouts table
+    cur.execute(
+        "INSERT INTO workouts(workoutid, time, distance, created, owner, postid) VALUES (DEFAULT, %s, %s, DEFAULT, %s, %s)",
+        (time, distance, owner, created_postid)
+    )
 
-        # Retrieve the id of the post created
-        created_postid = cur.fetchone()["postid"]
+    # Return created response
+    return runblue.error_code("Post created", 201)
 
-        # Insert into the workouts table
-        cur.execute(
-            "INSERT INTO workouts(workoutid, time, distance, created, owner, postid) VALUES (DEFAULT, %s, %s, DEFAULT, %s, %s)",
-            (request_data["time"], request_data["distance"], request_data["owner"], created_postid)
-        )
-
-        # Return created response
-        return runblue.error_code("Post created", 201)
+@runblue.app.route('/api/v1/posts/', methods=["GET"])
+def get_posts():
+    """Endpoint to get a collection of posts."""
+    # Get db connection
+    cur = runblue.model.get_db()
 
     # Get the username, if provided
     username = request.args.get("user")
@@ -84,6 +107,7 @@ def posts():
 
 @runblue.app.route('/api/v1/posts/<int:postid>/', methods=["GET"])
 def get_post(postid):
+    """Endpoint to get a post by postid."""
     # Setup context for response
     context = {
         "url": "/api/v1/posts/" + str(postid) + "/"
