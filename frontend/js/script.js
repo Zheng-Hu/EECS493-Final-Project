@@ -6,10 +6,9 @@ var app_view = new Vue({
         showFeed: false,
         showMakeAPost: false,
         showLeaderboard: false,
-        showProfile: false,
 
         showNavbar: false,
-        noProfile: false,
+       // noProfile: false,
 
         leaderboard: {
             sort_by: ["Name", "Distance", "Time", "Date"],
@@ -19,7 +18,7 @@ var app_view = new Vue({
         },
 
 
-        Profile: "Profile",
+       // Profile: "Profile",
 
         username: '',
         password: '',
@@ -34,25 +33,16 @@ var app_view = new Vue({
         Normal: "btn-primary",
 
         //HARD CODED FEED DATA
-        feedArray: [{ "username": "john", "runIMG": "./johnrunning.jpeg", "Caption": "1 mile run", "Distance": "1 mile", "Time": "30 minutes", "Date": "10/3/10", "Comments": "{'username': 'susan', 'comment': 'what a great run today!'}" }, { "username": "jack", "runIMG": "./jackrunning.jpeg", "Caption": "2 mile run", "Distance": "2 mile", "Time": "20 minutes", "Date": "10/10/10", "Caption": "1 mile run", "Distance": "1 mile", "Time": "30 minutes", "Date": "10/3/10", "Comments": "{'username': 'sam', 'comment': 'awesome!'}" }, { "username": "jill", "runIMG": "./jillrunning.jpeg", "Caption": "3 mile run", "Distance": "3 mile", "Time": "60 minutes", "Date": "10/3/21", "Caption": "1 mile run", "Distance": "1 mile", "Time": "30 minutes", "Date": "10/3/10", "Comments": "{'username': 'sara', 'comment': 'lookin' good!'}" }],
+        feedArrayHARDCODE: [{ "username": "john", "runIMG": "./johnrunning.jpeg", "Caption": "1 mile run", "Distance": "1 mile", "Time": "30 minutes", "Date": "10/3/10", "Comments": "{'username': 'susan', 'comment': 'what a great run today!'}" }, { "username": "jack", "runIMG": "./jackrunning.jpeg", "Caption": "2 mile run", "Distance": "2 mile", "Time": "20 minutes", "Date": "10/10/10", "Caption": "1 mile run", "Distance": "1 mile", "Time": "30 minutes", "Date": "10/3/10", "Comments": "{'username': 'sam', 'comment': 'awesome!'}" }, { "username": "jill", "runIMG": "./jillrunning.jpeg", "Caption": "3 mile run", "Distance": "3 mile", "Time": "60 minutes", "Date": "10/3/21", "Caption": "1 mile run", "Distance": "1 mile", "Time": "30 minutes", "Date": "10/3/10", "Comments": "{'username': 'sara', 'comment': 'lookin' good!'}" }],
+        feedArray: [],
 
-        heartImage: ['./heartNOFill.png', './heartNOFill.png', './heartNOFill.png'],
-        noFillHeart: "./heartNOFill.png",
-        heartFill: "./heartFill.png",
 
-        postLiked: [false, false, false],
-
-        Comment: [false, false, false],
-
-        user_comment: [],
-
-        showCommentsBox: [false, false, false],
 
 
     },
 
     methods: {
-
+/* removed temporarily
         //called when the profile button is clicked
         profileClick: function (event) {
 
@@ -77,7 +67,7 @@ var app_view = new Vue({
             }
 
         }, //end profileClick function
-
+*/
         //called when user clicks sign in button
         signInButton: function (event) {
 
@@ -90,7 +80,7 @@ var app_view = new Vue({
             this.showFeed = true;
             this.showSignIn = false;
             this.showNavbar = true;
-            this.noProfile = true;
+            //this.noProfile = true;
 
 
         },//end sign in button function
@@ -121,7 +111,7 @@ var app_view = new Vue({
                 this.showCreateAccount = false;
                 this.showFeed = true;
                 this.showNavbar = true;
-                this.noProfile = true;
+                //this.noProfile = true;
 
             }
 
@@ -132,14 +122,14 @@ var app_view = new Vue({
             this.showFeed = true;
             this.showMakeAPost = false;
             this.showLeaderboard = false;
-            this.showProfile = false;
+           // this.showProfile = false;
 
         },
         makeAPostClick: function (event) {
             this.showFeed = false;
             this.showMakeAPost = true;
             this.showLeaderboard = false;
-            this.showProfile = false;
+           // this.showProfile = false;
 
 
         },
@@ -147,57 +137,19 @@ var app_view = new Vue({
             this.showFeed = false;
             this.showLeaderboard = true;
             this.showMakeAPost = false;
-            this.showProfile = false;
+            //this.showProfile = false;
 
         },
 
-        showComments: function (index) {
+        //button clicked to refresh the feed
+        updateFeed: function(event){
 
-            if (this.showCommentsBox[index] == false) {
-                this.$set(this.showCommentsBox, index, true);
-            }
-            else {
-                this.$set(this.showCommentsBox, index, false);
-            }
+            //get the new data from the api
+            this.mounted();
 
 
         },
 
-        likePost: function (index) {
-            //post is not liked so like the post
-            if (this.postLiked[index] == false) {
-                this.postLiked[index] = true;
-                this.$set(this.heartImage, index, this.heartFill);
-            }
-            else {
-                this.postLiked[index] = false;
-                this.heartImage[index] = this.noFillHeart;
-                this.$set(this.heartImage, index, this.noFillHeart);
-            }
-
-
-        },
-
-        commentPost: function (index) {
-
-            if (this.Comment[index] == false) {
-                this.$set(this.Comment, index, true);
-            }
-            else {
-                this.$set(this.Comment, index, false);
-            }
-
-
-        },
-
-        postComment: function (index) {
-
-            //add the comment to the comment box
-            //set to the index of the input which is user_comment
-
-            this.$set(this.Comment, index, false);
-
-        },
 
 
         // Leaderboard
@@ -218,6 +170,24 @@ var app_view = new Vue({
         on_filter_dropdown_click: function (idx) {
             this.leaderboard.filter_by_idx = idx;
         },
+
+            //set the feed array from the api
+            //called on load in
+            async mounted() {
+                axios 
+
+                const promise = axios.get('http://localhost:8080/api/v1/posts/');
+        
+            
+                promise
+        
+                .then((response) => response.data)
+            
+                .then(data => this.feedArray = data.results)
+
+                .catch((e) => console.log("get feed data catch"))
+            },
+
 
     },
 
@@ -240,7 +210,5 @@ var app_view = new Vue({
         }
     },
 
-    mounted() {
 
-    }
 })
