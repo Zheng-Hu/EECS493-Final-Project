@@ -4,9 +4,15 @@ textarea {
 
 /* NavBar */
 
+.refresh{
+    position: sticky;
+    top: 75px;
+    margin-left: -100px;
+}
+
 .runningGif{
-    margin-left: 5%;
-    margin-top: -18px;
+    margin-left: 800px;
+    margin-top: 0px;
 }
 
 .title{
