@@ -20,6 +20,10 @@
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/sign_in.css">
     <script src="./js/script.js" defer></script>
+
+    <script src='./js/jquery.min.js'></script>
+    <script src='./js/page.js'></script>
+
     </title>
 </head>
 
@@ -34,15 +38,17 @@
 
                 <ul class="navbar-nav mr-auto" style="list-style: none;">
                     <li class="nav-item active">
-                        <img src="./img/runningGif.gif" alt="Man running across screen" width="800" height=100px
+                        <img src="./img/headerGif.gif" alt="Man running across screen" width="50px" height='70px'
                             class="runningGif">
                     </li>
 
+                    <!--
                     <li class="nav-item active profileBtn" v-show="noProfile">
                         <button :class='showProfile ? Success: Normal' class='btn sign-in-button'
                             v-on:click="profileClick" style="height: 50px;">
                             {{Profile}} </button>
                     </li>
+                -->
 
             </div>
         </nav>
@@ -58,7 +64,7 @@
 
                         <ul class="navbar-nav mr-auto" style="list-style: none;">
 
-                            <li class="nav-item active" style="margin-left: 200px;">
+                            <li class="nav-item active" style="margin-left: 0px;">
                                 <button :class='showMakeAPost ? Success: Normal' class='btn sign-in-button'
                                     v-on:click="makeAPostClick" style="height: 50px; width: 100px; margin-bottom: 5px;">
                                     Make A Post </button>
@@ -151,7 +157,11 @@
         <!-- Feed -->
         <div class="container" v-show="showFeed">
 
-            <div v-for="(person, index) in feedArray" style="margin-top: 50px;">
+            <div class='refresh'>
+                <button class='btn btn-primary' v-on:click='updateFeed'>Refresh Feed </button>
+            </div>
+
+            <div v-for="(person, index) in feedArrayHARDCODE" style="margin-top: 50px;">
 
                 <div class="feedTitle">
                     {{person.username}}'s Run on {{person.Date}}
@@ -171,50 +181,9 @@
                         Time: {{person.Time}}
                     </div>
 
-                    <button class='btn' v-on:click="showComments(index)" style="margin-left: 42%; margin-bottom: 10px;">
-                        See Comments!
-                    </button>
-
-                    <div>
-
-
-                        <button class='btn' v-on:click="likePost(index)"
-                            style="margin-left: 150px; margin-bottom: 10px;">
-                            Like {{person.username}}'s Post
-                        </button>
-
-                        <img v-bind:src="heartImage[index]" class="heartStyle">
-
-                        <button class='btn' v-on:click="commentPost(index)"
-                            style="margin-left: 175px; margin-bottom: 10px;">
-                            Comment on {{person.username}}'s Post
-                        </button>
-
-                    </div>
 
                 </div>
 
-
-
-                <div v-show="Comment[index]" class='commentBox'>
-                    Type Comment:
-                    <input type="text" v-model="user_comment" style='width: 500px'>
-
-                    <button class='btn-primary' v-on:click="postComment(index)">
-                        Post!
-                    </button>
-
-                </div>
-
-                <div v-show="showCommentsBox[index]" class='allComments'>
-
-                    Comments:
-
-                    <div v-for="(personComment, index_2) in person.Comments">
-                        {{personComment.username}} says {{personComment.comment}}
-                    </div>
-
-                </div>
 
             </div>
 
@@ -327,7 +296,8 @@
             </table>
         </div>
 
-        <!-- Profile -->
+
+        <!-- Profile 
         <div class="container" v-show="showProfile">
 
             <div class="container-fluid" id='profile-header'>
@@ -355,7 +325,7 @@
                     </li>
                 </ul>
             </div>
-
+        -->
 
 
 
