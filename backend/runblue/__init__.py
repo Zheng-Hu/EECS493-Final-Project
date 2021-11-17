@@ -1,5 +1,7 @@
 """runblue package initializer."""
 import flask
+from flask_cors import CORS
+
 
 # app is a single object used by all the code modules in this package
 app = flask.Flask(__name__)  # pylint: disable=invalid-name
@@ -10,6 +12,9 @@ app.config.from_object('runblue.config')
 # Tell the app about api and model
 import runblue.restapi
 import runblue.model
+
+# enable CORS
+CORS(app, resources={r'/*': {'origins': '*'}})
 
 
 # Check if a user exists in the database

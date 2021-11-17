@@ -207,7 +207,7 @@ var app_view = new Vue({
             .then((response) => response.data)
             
             .then(data => this.feedArray = data)
-            //.then((data => console.log(data)))
+            .then((data => console.log(data)))
 
             .catch((e) => console.log("get feed data catch"))
 
