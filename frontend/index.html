@@ -33,7 +33,7 @@
         <nav class="navbar navbar-default">
             <div class="container">
                 <div class="navbar-header">
-                    <h3 class='title'>Run<span style="color:blue">Blue</span></h3>
+                    <h3 class='title'>Run<span style="color:#245580">Blue</span></h3>
                 </div>
 
                 <ul class="navbar-nav mr-auto" style="list-style: none;">
@@ -62,21 +62,21 @@
                     <div class="row">
 
 
-                        <ul class="navbar-nav mr-auto" style="list-style: none;">
+                        <ul class="navbar-nav mr-auto" style="list-style: none; width: 800px;">
 
                             <li class="nav-item active" style="margin-left: 0px;">
-                                <button :class='showMakeAPost ? Success: Normal' class='btn sign-in-button'
+                                <button :class='showMakeAPost ? Success: Normal' class='btn'
                                     v-on:click="makeAPostClick" style="height: 50px; width: 100px; margin-bottom: 5px;">
                                     Make A Post </button>
                             </li>
 
-                            <li class="nav-item active" style="margin-left: 200px;">
-                                <button :class="showFeed ? Success: Normal" class='btn sign-in-button'
+                            <li class="nav-item active" style="margin-left: 215px;">
+                                <button :class="showFeed ? Success: Normal" class='btn'
                                     v-on:click="feedClick" style="height: 50px; width: 100px; margin-bottom: 5px;">
                                     Feed</button>
                             </li>
-                            <li class="nav-item active" style="margin-left: 200px;">
-                                <button :class="showLeaderboard ? Success: Normal" class='btn sign-in-button'
+                            <li class="nav-item active" style="margin-left: 215px;">
+                                <button :class="showLeaderboard ? Success: Normal" class='btn'
                                     v-on:click="leaderboardClick"
                                     style="height: 50px; width: 100px; margin-bottom: 5px;"> Leaderboard</button>
                             </li>
@@ -95,7 +95,7 @@
         <!-- Sign In -->
         <div class="container" v-show="showSignIn">
             <div style="font-size: 75px; text-align: center;">
-                Welcome to Run<span style="color:blue">Blue</span>!
+                Welcome to Run<span style="color:#245580">Blue</span>!
             </div>
 
             <br>
@@ -122,7 +122,7 @@
         <!-- Create Account -->
         <div class="container" v-show="showCreateAccount">
             <div style="font-size: 40px; text-align: center;">
-                Enter in some Information to Create a Run<span style="color:blue">Blue</span> Account!
+                Enter in some Information to Create a Run<span style="color:#245580">Blue</span> Account!
             </div>
 
             <br>
@@ -158,10 +158,10 @@
         <div class="container" v-show="showFeed">
 
             <div class='refresh'>
-                <button class='btn btn-primary' v-on:click='updateFeed'>Refresh Feed </button>
+                <button class='btn btn-primary' class='button' v-on:click='updateFeed'>Refresh Feed </button>
             </div>
 
-            <div v-for="(person, index) in feedArrayHARDCODE" style="margin-top: 50px;">
+            <div v-for="(person, index) in feedArrayHARDCODE">
 
                 <div class="feedTitle">
                     {{person.username}}'s Run on {{person.Date}}
@@ -171,14 +171,14 @@
                 </div>
 
                 <div class="feedDescription">
-                    <div style="margin-left: 5px;">
-                        {{person.username}}: {{person.Caption}}
+                    <div style="margin-left: 5px; margin-bottom: 5px;">
+                        <span style="font-weight:bold ;"> Caption: </span> {{person.Caption}}
                     </div>
-                    <div style="margin-left: 5px;">
-                        Distance: {{person.Distance}}
+                    <div style="margin-left: 5px; margin-bottom: 5px;">
+                        <span style="font-weight:bold ;"> Distance: </span> {{person.Distance}}
                     </div>
-                    <div style="margin-left: 5px;">
-                        Time: {{person.Time}}
+                    <div style="margin-left: 5px; margin-bottom: 5px;">
+                        <span style="font-weight: bold;"> Time: </span>{{person.Time}}
                     </div>
 
 
