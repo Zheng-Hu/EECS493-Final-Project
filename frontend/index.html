@@ -66,19 +66,19 @@
 
                             <li class="nav-item active" style="margin-left: 0px;">
                                 <button :class='showMakeAPost ? Success: Normal' class='btn'
-                                    v-on:click="makeAPostClick" style="height: 50px; width: 100px; margin-bottom: 5px;">
+                                    v-on:click="makeAPostClick" style="height: 50px; width: 100px; margin-bottom: 5px; margin-top: 5px;">
                                     Make A Post </button>
                             </li>
 
                             <li class="nav-item active" style="margin-left: 215px;">
                                 <button :class="showFeed ? Success: Normal" class='btn'
-                                    v-on:click="feedClick" style="height: 50px; width: 100px; margin-bottom: 5px;">
+                                    v-on:click="feedClick" style="height: 50px; width: 100px; margin-bottom: 5px; margin-top: 5px;">
                                     Feed</button>
                             </li>
                             <li class="nav-item active" style="margin-left: 215px;">
                                 <button :class="showLeaderboard ? Success: Normal" class='btn'
                                     v-on:click="leaderboardClick"
-                                    style="height: 50px; width: 100px; margin-bottom: 5px;"> Leaderboard</button>
+                                    style="height: 50px; width: 100px; margin-bottom: 5px; margin-top: 5px;"> Leaderboard</button>
                             </li>
                         </ul>
 
@@ -161,24 +161,24 @@
                 <button class='btn btn-primary' class='button' v-on:click='updateFeed'>Refresh Feed </button>
             </div>
 
-            <div v-for="(person, index) in feedArrayHARDCODE">
+            <div v-for="(person, index) in feedArray">
 
                 <div class="feedTitle">
-                    {{person.username}}'s Run on {{person.Date}}
+                    {{person.owner}}'s Run
                 </div>
                 <div>
-                    <img v-bind:src='person.runIMG' class='feedImage'>
+                    <img v-bind:src='person.imageurl' class='feedImage'>
                 </div>
 
                 <div class="feedDescription">
                     <div style="margin-left: 5px; margin-bottom: 5px;">
-                        <span style="font-weight:bold ;"> Caption: </span> {{person.Caption}}
+                        <span style="font-weight:bold ;"> Caption: </span> {{person.caption}}
                     </div>
                     <div style="margin-left: 5px; margin-bottom: 5px;">
-                        <span style="font-weight:bold ;"> Distance: </span> {{person.Distance}}
+                        <span style="font-weight:bold ;"> Distance: </span> {{person.distance}} miles
                     </div>
                     <div style="margin-left: 5px; margin-bottom: 5px;">
-                        <span style="font-weight: bold;"> Time: </span>{{person.Time}}
+                        <span style="font-weight: bold;"> Time: </span>{{person.time}} minutes
                     </div>
 
 
