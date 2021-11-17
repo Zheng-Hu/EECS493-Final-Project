@@ -25,7 +25,7 @@ def create_account():
 
     # Ensure that username and password aren't null
     if username == "" or username == None or password == "" or password == None:
-        return runblue.error_code("Malformed username or password.", 404)
+        return runblue.error_code("Malformed username or password.", 400)
 
     # Check to see if username has already been used
     cur = runblue.model.get_db()
