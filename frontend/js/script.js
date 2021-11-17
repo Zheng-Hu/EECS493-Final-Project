@@ -33,7 +33,28 @@ var app_view = new Vue({
         Normal: "btn-primary",
 
         //HARD CODED FEED DATA
-        feedArrayHARDCODE: [{ "username": "john", "runIMG": "./johnrunning.jpeg", "Caption": "1 mile run", "Distance": "1 mile", "Time": "30 minutes", "Date": "10/3/10", "Comments": "{'username': 'susan', 'comment': 'what a great run today!'}" }, { "username": "jack", "runIMG": "./jackrunning.jpeg", "Caption": "2 mile run", "Distance": "2 mile", "Time": "20 minutes", "Date": "10/10/10", "Caption": "1 mile run", "Distance": "1 mile", "Time": "30 minutes", "Date": "10/3/10", "Comments": "{'username': 'sam', 'comment': 'awesome!'}" }, { "username": "jill", "runIMG": "./jillrunning.jpeg", "Caption": "3 mile run", "Distance": "3 mile", "Time": "60 minutes", "Date": "10/3/21", "Caption": "1 mile run", "Distance": "1 mile", "Time": "30 minutes", "Date": "10/3/10", "Comments": "{'username': 'sara', 'comment': 'lookin' good!'}" }],
+        //feedArrayHARDCODE: [{ "username": "john", "runIMG": "./img/johnrunning.jpeg", "Caption": "1 mile run", "Distance": "1 mile", "Time": "30 minutes", "Date": "10/3/10", "Comments": "{'username': 'susan', 'comment': 'what a great run today!'}" }, { "username": "jack", "runIMG": "./img/jackrunning.jpeg", "Caption": "2 mile run", "Distance": "2 mile", "Time": "20 minutes", "Date": "10/10/10", "Caption": "1 mile run", "Distance": "1 mile", "Time": "30 minutes", "Date": "10/3/10", "Comments": "{'username': 'sam', 'comment': 'awesome!'}" }, { "username": "jill", "runIMG": "./img/jillrunning.jpeg", "Caption": "3 mile run", "Distance": "3 mile", "Time": "60 minutes", "Date": "10/3/21", "Caption": "1 mile run", "Distance": "1 mile", "Time": "30 minutes", "Date": "10/3/10", "Comments": "{'username': 'sara', 'comment': 'lookin' good!'}" }],
+        feedArrayHARDCODE: [
+            {
+              "caption": "Had a great run today! Can't wait to get back out this weekend!",
+              "created": "Mon, 15 Nov 2021 05:49:05 GMT",
+              "distance": 2.9,
+              "imageurl": "http://localhost:8080/api/v1/posts/c779560fd34245f0b3c0acbd6afda970.jpeg",
+              "owner": "jack",
+              "postid": 1,
+              "time": 21.4
+            },
+            {
+              "caption": "Got everyone out for a run today!",
+              "created": "Mon, 15 Nov 2021 05:49:05 GMT",
+              "distance": 3.2,
+              "imageurl": "3ce034d523584fc4a095055c1950206c.jpeg",
+              "owner": "jill",
+              "postid": 2,
+              "time": 22.3
+            }
+          ],
+
         feedArray: [],
 
 
@@ -81,6 +102,7 @@ var app_view = new Vue({
             this.showSignIn = false;
             this.showNavbar = true;
             //this.noProfile = true;
+            this.mounted();
 
 
         },//end sign in button function
@@ -112,6 +134,7 @@ var app_view = new Vue({
                 this.showFeed = true;
                 this.showNavbar = true;
                 //this.noProfile = true;
+                this.mounted();
 
             }
 
@@ -123,6 +146,7 @@ var app_view = new Vue({
             this.showMakeAPost = false;
             this.showLeaderboard = false;
            // this.showProfile = false;
+           this.mounted();
 
         },
         makeAPostClick: function (event) {
@@ -171,22 +195,23 @@ var app_view = new Vue({
             this.leaderboard.filter_by_idx = idx;
         },
 
-            //set the feed array from the api
-            //called on load in
-            async mounted() {
-                axios 
+        //set the feed array from the api
+        //called on load in
+        async mounted() {
+            axios 
 
-                const promise = axios.get('http://localhost:8080/api/v1/posts/');
-        
+            const promise = axios.get('http://localhost:8080/api/v1/posts/'); 
             
-                promise
+            promise
         
-                .then((response) => response.data)
+            .then((response) => response.data)
             
-                .then(data => this.feedArray = data.results)
+            .then(data => this.feedArray = data)
+            //.then((data => console.log(data)))
 
-                .catch((e) => console.log("get feed data catch"))
-            },
+            .catch((e) => console.log("get feed data catch"))
+
+        },
 
 
     },
