@@ -1,8 +1,8 @@
-INSERT INTO users(username, created)
+INSERT INTO users(username, password, created)
 VALUES
-    ('jack', DEFAULT),
-    ('jill', DEFAULT),
-    ('kevin', DEFAULT);
+    ('jack', 'password', DEFAULT),
+    ('jill', 'password', DEFAULT),
+    ('kevin', 'password', DEFAULT);
 
 INSERT INTO posts(postid, filename, caption, created, owner)
 VALUES

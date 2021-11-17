@@ -1,5 +1,9 @@
+/* Note: we are storing plain-text passwords
+   because this project is more proof-of-concept 
+   than anything, especially for the backend */
 CREATE TABLE users(
   username VARCHAR(20) PRIMARY KEY,
+  password TEXT NOT NULL,
   created TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
