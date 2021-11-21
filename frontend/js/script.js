@@ -207,8 +207,13 @@ var app_view = new Vue({
 
                 .then((response) => response.data)
 
-                .then(data => this.feedArray = data)
-                .then((data => console.log(data)))
+                .then(data => {
+                    this.feedArray = data.data;
+                    this.feedArray.forEach(element => {
+                        element.imageurl = "http://localhost:8080/media/" + element.imageurl;
+                    });
+                })
+                .then((data => console.log(this.feedArray)))
 
                 .catch((e) => console.log("get feed data catch"))
         },

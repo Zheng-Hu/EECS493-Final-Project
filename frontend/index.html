@@ -163,10 +163,10 @@
                 <button class='btn btn-primary' class='button' v-on:click='updateFeed'>Refresh Feed </button>
             </div>
 
-            <div v-for="(person, index) in feedArray">
+            <div v-for="person in feedArray">
 
                 <div class="feedTitle">
-                    {{person.owner}}'s Run
+                    {{ person.owner }}'s Run
                 </div>
                 <div>
                     <img v-bind:src='person.imageurl' class='feedImage'>
