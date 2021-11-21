@@ -15,7 +15,7 @@ var app_view = new Vue({
             sort_by_idx: 3,
             filter_by: ["Today", "Last Week", "Last Month", "Last 3 Months", "Last Year", "All Time"],
             filter_by_idx: 5,
-            data =[]
+            data: []
         },
 
 
@@ -201,9 +201,9 @@ var app_view = new Vue({
         async mounted() {
             axios
 
-            const promise = axios.get('http://localhost:8080/api/v1/posts/');
+            const posts_promise = axios.get('http://localhost:8080/api/v1/posts/');
 
-            promise
+            posts_promise
 
                 .then((response) => response.data)
 
@@ -211,30 +211,44 @@ var app_view = new Vue({
                 .then((data => console.log(data)))
 
                 .catch((e) => console.log("get feed data catch"))
-
         },
 
 
     },
 
     computed: {
-        create_leaderboard: function () {
-            leaderboard = [];
+        sorted_leaderboard: function () {
 
-            for (let i = 0; i < 10; i++) {
-                let row = {
-                    name: 'Jack Jackson',
-                    distance: 2 + (i * 0.25),
-                    time: "20:13",
-                    date: "10/11/2021"
-                };
+            if (!this.leaderboard) return []
 
-                leaderboard.push(row);
-            }
+            let leaderboard = this.leaderboard;
 
-            return leaderboard;
+            data = leaderboard.data;
+
+            // Name
+            if (leaderboard.sort_by_idx == 0)
+                data.sort((a, b) => (a.owner > b.owner) ? 1 : -1)
+            // Distance
+            else if (leaderboard.sort_by_idx == 1)
+                data.sort((a, b) => (a.distance > b.distance) ? 1 : -1)
+            // Time
+            else if (leaderboard.sort_by_idx == 2)
+                data.sort((a, b) => (a.time > b.time) ? 1 : -1)
+            // Date
+            // TODO
+
+            return data;
         }
     },
+
+    mounted() {
+
+        axios
+            .get('http://localhost:8080/api/v1/leaderboard/')
+            .then(response => (this.leaderboard.data = response.data.data))
+            .catch((e) => console.log("Leaderboard API call ERROR"))
+
+    }
 
 
 })
