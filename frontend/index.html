@@ -65,20 +65,21 @@
                         <ul class="navbar-nav mr-auto" style="list-style: none; width: 800px;">
 
                             <li class="nav-item active" style="margin-left: 0px;">
-                                <button :class='showMakeAPost ? Success: Normal' class='btn'
-                                    v-on:click="makeAPostClick" style="height: 50px; width: 100px; margin-bottom: 5px; margin-top: 5px;">
+                                <button :class='showMakeAPost ? Success: Normal' class='btn' v-on:click="makeAPostClick"
+                                    style="height: 50px; width: 100px; margin-bottom: 5px; margin-top: 5px;">
                                     Make A Post </button>
                             </li>
 
                             <li class="nav-item active" style="margin-left: 215px;">
-                                <button :class="showFeed ? Success: Normal" class='btn'
-                                    v-on:click="feedClick" style="height: 50px; width: 100px; margin-bottom: 5px; margin-top: 5px;">
+                                <button :class="showFeed ? Success: Normal" class='btn' v-on:click="feedClick"
+                                    style="height: 50px; width: 100px; margin-bottom: 5px; margin-top: 5px;">
                                     Feed</button>
                             </li>
                             <li class="nav-item active" style="margin-left: 215px;">
                                 <button :class="showLeaderboard ? Success: Normal" class='btn'
                                     v-on:click="leaderboardClick"
-                                    style="height: 50px; width: 100px; margin-bottom: 5px; margin-top: 5px;"> Leaderboard</button>
+                                    style="height: 50px; width: 100px; margin-bottom: 5px; margin-top: 5px;">
+                                    Leaderboard</button>
                             </li>
                         </ul>
 
@@ -285,12 +286,12 @@
                         <th scope="col">Date</th>
                     </tr>
                 </thead>
-                <tbody v-for="entry in create_leaderboard">
+                <tbody v-for="entry in leaderboard.data">
                     <tr>
-                        <th scope="row">{{entry.name}}</th>
+                        <th scope="row">{{entry.owner}}</th>
                         <td>{{entry.distance}}</td>
                         <td>{{entry.time}}</td>
-                        <td>{{entry.date}}</td>
+                        <td>TODO: Date</td>
                     </tr>
                 </tbody>
             </table>
@@ -329,7 +330,7 @@
 
 
 
-        </div>
+    </div>
 
 
 

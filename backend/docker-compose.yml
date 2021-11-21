@@ -21,7 +21,7 @@ services:
       - runbluedb:/var/lib/postgres
 
   runblue-api:
-    image: runblue:latest
+    build: .
     restart: unless-stopped
     networks:
       - runblue_bridge
@@ -52,4 +52,4 @@ networks:
       com.docker.network.bridge.name: runblue_bridge
 
 volumes:
-  runbluedb:
+  runbluedb: null

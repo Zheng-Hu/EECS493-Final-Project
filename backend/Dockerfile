@@ -11,4 +11,6 @@ RUN pip3 install -r requirements.txt
 
 COPY . /runblue
 
+ENV FLASK_APP=runblue
+
 ENTRYPOINT FLASK_APP=runblue flask run --host 0.0.0.0 --port 8080

@@ -8,17 +8,18 @@ var app_view = new Vue({
         showLeaderboard: false,
 
         showNavbar: false,
-       // noProfile: false,
+        // noProfile: false,
 
         leaderboard: {
             sort_by: ["Name", "Distance", "Time", "Date"],
             sort_by_idx: 3,
             filter_by: ["Today", "Last Week", "Last Month", "Last 3 Months", "Last Year", "All Time"],
             filter_by_idx: 5,
+            data =[]
         },
 
 
-       // Profile: "Profile",
+        // Profile: "Profile",
 
         username: '',
         password: '',
@@ -36,24 +37,24 @@ var app_view = new Vue({
         //feedArrayHARDCODE: [{ "username": "john", "runIMG": "./img/johnrunning.jpeg", "Caption": "1 mile run", "Distance": "1 mile", "Time": "30 minutes", "Date": "10/3/10", "Comments": "{'username': 'susan', 'comment': 'what a great run today!'}" }, { "username": "jack", "runIMG": "./img/jackrunning.jpeg", "Caption": "2 mile run", "Distance": "2 mile", "Time": "20 minutes", "Date": "10/10/10", "Caption": "1 mile run", "Distance": "1 mile", "Time": "30 minutes", "Date": "10/3/10", "Comments": "{'username': 'sam', 'comment': 'awesome!'}" }, { "username": "jill", "runIMG": "./img/jillrunning.jpeg", "Caption": "3 mile run", "Distance": "3 mile", "Time": "60 minutes", "Date": "10/3/21", "Caption": "1 mile run", "Distance": "1 mile", "Time": "30 minutes", "Date": "10/3/10", "Comments": "{'username': 'sara', 'comment': 'lookin' good!'}" }],
         feedArrayHARDCODE: [
             {
-              "caption": "Had a great run today! Can't wait to get back out this weekend!",
-              "created": "Mon, 15 Nov 2021 05:49:05 GMT",
-              "distance": 2.9,
-              "imageurl": "http://localhost:8080/api/v1/posts/c779560fd34245f0b3c0acbd6afda970.jpeg",
-              "owner": "jack",
-              "postid": 1,
-              "time": 21.4
+                "caption": "Had a great run today! Can't wait to get back out this weekend!",
+                "created": "Mon, 15 Nov 2021 05:49:05 GMT",
+                "distance": 2.9,
+                "imageurl": "http://localhost:8080/api/v1/posts/c779560fd34245f0b3c0acbd6afda970.jpeg",
+                "owner": "jack",
+                "postid": 1,
+                "time": 21.4
             },
             {
-              "caption": "Got everyone out for a run today!",
-              "created": "Mon, 15 Nov 2021 05:49:05 GMT",
-              "distance": 3.2,
-              "imageurl": "3ce034d523584fc4a095055c1950206c.jpeg",
-              "owner": "jill",
-              "postid": 2,
-              "time": 22.3
+                "caption": "Got everyone out for a run today!",
+                "created": "Mon, 15 Nov 2021 05:49:05 GMT",
+                "distance": 3.2,
+                "imageurl": "3ce034d523584fc4a095055c1950206c.jpeg",
+                "owner": "jill",
+                "postid": 2,
+                "time": 22.3
             }
-          ],
+        ],
 
         feedArray: [],
 
@@ -63,32 +64,32 @@ var app_view = new Vue({
     },
 
     methods: {
-/* removed temporarily
-        //called when the profile button is clicked
-        profileClick: function (event) {
-
-            //if the profile is currently being shown close it
-            if (this.showProfile) {
-                this.showProfile = false;
-                //show the feed
-                this.showFeed = true;
-                this.showNavbar = true;
-
-            }
-            else {
-                //open the profile screen
-                //hide and show the things we need and dont
-                this.showProfile = true;
-                this.showSignIn = false;
-                this.showFeed = false;
-                this.showCreateAccount = false;
-                this.showMakeAPost = false;
-                this.showLeaderboard = false;
-                this.showNavbar = true;
-            }
-
-        }, //end profileClick function
-*/
+        /* removed temporarily
+                //called when the profile button is clicked
+                profileClick: function (event) {
+        
+                    //if the profile is currently being shown close it
+                    if (this.showProfile) {
+                        this.showProfile = false;
+                        //show the feed
+                        this.showFeed = true;
+                        this.showNavbar = true;
+        
+                    }
+                    else {
+                        //open the profile screen
+                        //hide and show the things we need and dont
+                        this.showProfile = true;
+                        this.showSignIn = false;
+                        this.showFeed = false;
+                        this.showCreateAccount = false;
+                        this.showMakeAPost = false;
+                        this.showLeaderboard = false;
+                        this.showNavbar = true;
+                    }
+        
+                }, //end profileClick function
+        */
         //called when user clicks sign in button
         signInButton: function (event) {
 
@@ -145,15 +146,15 @@ var app_view = new Vue({
             this.showFeed = true;
             this.showMakeAPost = false;
             this.showLeaderboard = false;
-           // this.showProfile = false;
-           this.mounted();
+            // this.showProfile = false;
+            this.mounted();
 
         },
         makeAPostClick: function (event) {
             this.showFeed = false;
             this.showMakeAPost = true;
             this.showLeaderboard = false;
-           // this.showProfile = false;
+            // this.showProfile = false;
 
 
         },
@@ -166,7 +167,7 @@ var app_view = new Vue({
         },
 
         //button clicked to refresh the feed
-        updateFeed: function(event){
+        updateFeed: function (event) {
 
             //get the new data from the api
             this.mounted();
@@ -198,18 +199,18 @@ var app_view = new Vue({
         //set the feed array from the api
         //called on load in
         async mounted() {
-            axios 
+            axios
 
-            const promise = axios.get('http://localhost:8080/api/v1/posts/'); 
-            
+            const promise = axios.get('http://localhost:8080/api/v1/posts/');
+
             promise
-        
-            .then((response) => response.data)
-            
-            .then(data => this.feedArray = data)
-            .then((data => console.log(data)))
 
-            .catch((e) => console.log("get feed data catch"))
+                .then((response) => response.data)
+
+                .then(data => this.feedArray = data)
+                .then((data => console.log(data)))
+
+                .catch((e) => console.log("get feed data catch"))
 
         },
 
