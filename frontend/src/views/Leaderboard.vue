@@ -1,7 +1,7 @@
 <template>
     <div>
-          <div>
-            <Navigator page="Feed"/>
+        <div>
+            <Navigator page="Leaderboard"/>
         </div>
         <div>
         </div>

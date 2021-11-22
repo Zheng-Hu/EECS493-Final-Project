@@ -25,7 +25,7 @@
                             <label>Repeat Password</label>
                             <input type="password" class="form-control">
                         </div>
-                        <button class="btn btn-primary mt-4">Create Account</button>
+                        <router-link class="btn btn-primary mt-4" to="/feed">Create Account</router-link>
                     </form>
                 </div>
             </div>

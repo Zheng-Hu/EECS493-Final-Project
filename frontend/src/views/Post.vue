@@ -25,7 +25,7 @@
                                 <label>Image Upload</label>
                                 <input type="file" class="form-control" multiple accept="image/*">
                             </div>
-                            <button class="btn btn-primary mt-4">Post</button>
+                            <router-link to="/feed" class="btn btn-primary mt-4">Post</router-link>
                         </form>
                     </div>
                 </div>

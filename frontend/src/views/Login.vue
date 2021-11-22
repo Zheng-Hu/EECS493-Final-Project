@@ -14,8 +14,8 @@
                             <input type="password" class="form-control">
                         </div>
                         <div class="mt-4">
-                            <button class="btn btn-primary mx-1">Log In</button>
-                            <button class="btn btn-warning mx-1">Sign Up</button>
+                            <router-link class="btn btn-primary mx-1" to="/feed">Log In</router-link>
+                            <router-link class="btn btn-warning mx-1" to="/signup">Sign Up</router-link>
                         </div>
                     </form>
                 </div>

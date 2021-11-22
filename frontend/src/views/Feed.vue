@@ -1,6 +1,6 @@
 <template>
     <div>
-          <div>
+        <div>
             <Navigator page="Feed"/>
         </div>
         <div>
