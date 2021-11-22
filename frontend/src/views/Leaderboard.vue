@@ -4,7 +4,7 @@
             <Navigator page="Leaderboard"/>
         </div>
         <div class="row justify-content-center">
-            <h1 class="display-4 py-2 text-truncate text-center mb-3">Leaderboard</h1>
+            <h1 class="display-4 py-2 text-truncate text-center my-3">Leaderboard</h1>
             <table class="table table-striped table-bordered w-50">
                 <thead>
                     <tr>

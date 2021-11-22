@@ -22,8 +22,7 @@ def upload_post():
     filename = file.filename
 
     # Compute base name
-    uuid_basename = "{folder}{stem}{suffix}".format(
-        folder="/media/",
+    uuid_basename = "{stem}{suffix}".format(
         stem=uuid.uuid4().hex,
         suffix=pathlib.Path(filename).suffix
     )
