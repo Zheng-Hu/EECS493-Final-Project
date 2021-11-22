@@ -27,5 +27,18 @@
 <script>
 export default {
   name: 'Login'
+//   data: function () {
+//     return {
+//       user: ''
+//     }
+//   },
+//   methods: {
+//       updateUser() {
+//           console.log("clicked");
+//           this.$username = 'Ryan';
+//           this.user = this.$username;
+//           console.log(this.$username)
+//       }
+//   }
 }
 </script>
