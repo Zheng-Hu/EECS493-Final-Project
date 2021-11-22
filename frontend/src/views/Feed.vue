@@ -50,6 +50,11 @@ export default {
             posts: []
         }
     },
+    beforeCreate() {
+        if(this.$currentUser.username === '') {
+            this.$router.push({ path: '/' });
+        }
+    },
     created() {
         console.log(this.$currentUser.username);
         // Call API to get all posts

@@ -32,10 +32,15 @@
 import Navigator from '@/components/Navigator.vue'
 
 export default {
-  name: 'Leaderboard',
-  data: function () {
+    name: 'Leaderboard',
+    data: function () {
         return {
             workouts: []
+        }
+    },
+    beforeCreate() {
+        if(this.$currentUser.username === '') {
+            this.$router.push({ path: '/' });
         }
     },
     created() {

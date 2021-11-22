@@ -33,6 +33,11 @@ export default {
             password: ''
         }
     },
+    beforeCreate() {
+        if(this.$currentUser.username !== '') {
+            this.$router.push({ path: '/feed' });
+        }
+    },
     methods: {
         onSubmit() {
             // Call API

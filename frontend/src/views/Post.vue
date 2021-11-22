@@ -50,11 +50,23 @@ export default {
             time: ''
         }
     },
+    beforeCreate() {
+        if(this.$currentUser.username === '') {
+            this.$router.push({ path: '/' });
+        }
+    },
     methods: {
         onFileUpload (event) {
             this.FILE = event.target.files[0];
         },
         onSubmit() {
+            // Make sure user is logged in 
+            if (this.$currentUser.username === '') {
+                console.log("No user logged in.");
+                console.log(this.$currentUser.username);
+                return;
+            }
+
             // Get the form data
             const formData = new FormData();
             formData.append('file', this.FILE);
@@ -62,13 +74,6 @@ export default {
             formData.append('distance', this.distance);
             formData.append('time', this.time);
             formData.append('owner', this.$currentUser.username);
-
-            // Make sure user is logged in 
-            if (this.$currentUser.username === '') {
-                console.log("No user logged in.");
-                console.log(this.$currentUser.username);
-                return;
-            }
 
             // Send API call
             this.axios.post('http://localhost:8080/api/v1/posts/', formData)

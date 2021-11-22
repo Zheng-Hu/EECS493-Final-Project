@@ -17,7 +17,8 @@
                             <label>Repeat Password</label>
                             <input v-model="re_password" type="password" class="form-control">
                         </div>
-                        <button class="btn btn-primary mt-4">Create Account</button>
+                        <button class="btn btn-primary mt-4 mx-1">Create Account</button>
+                        <router-link class="btn btn-secondary mt-4 mx-1" to="/">Log In</router-link>
                     </form>
                 </div>
             </div>
@@ -33,6 +34,11 @@ export default {
             username: '',
             password: '',
             re_password: ''
+        }
+    },
+    beforeCreate() {
+        if(this.$currentUser.username !== '') {
+            this.$router.push({ path: '/feed' });
         }
     },
     methods: {
