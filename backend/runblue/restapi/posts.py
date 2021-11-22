@@ -79,13 +79,13 @@ def get_posts():
             return runblue.error_code("User could not be found.", 404)
 
         cur.execute(
-            "SELECT caption, created, filename AS imageurl, owner, postid FROM posts WHERE owner = %s",
+            "SELECT caption, created, filename AS imageurl, owner, postid FROM posts WHERE owner = %s ORDER BY created DESC",
             (username,)
         )
         context["data"] = list(cur.fetchall())
     else:
         cur.execute(
-            "SELECT caption, created, filename AS imageurl, owner, postid FROM posts"
+            "SELECT caption, created, filename AS imageurl, owner, postid FROM posts ORDER BY created DESC"
         )
         context["data"] = list(cur.fetchall())
 

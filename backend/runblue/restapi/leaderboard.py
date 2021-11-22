@@ -32,13 +32,13 @@ def get_leaderboard():
 
         # Get the user's leaderboard
         cur.execute(
-            "SELECT distance, owner, time, workoutid FROM workouts WHERE owner = %s LIMIT 10",
+            "SELECT distance, owner, time, workoutid FROM workouts WHERE owner = %s",
             (username,)
         )
         context['data'] = list(cur.fetchall())
     else:
         cur.execute(
-            "SELECT distance, owner, time, workoutid FROM workouts LIMIT 10"
+            "SELECT distance, owner, time, workoutid FROM workouts"
         )
         context["data"] = list(cur.fetchall())
 
@@ -46,6 +46,6 @@ def get_leaderboard():
     for workout in context["data"]:
         workout["permiletime"] = workout["time"] / workout["distance"]
 
-    context["data"] = sorted(context["data"], key=lambda i: i["permiletime"])
+    context["data"] = sorted(context["data"], key=lambda i: i["permiletime"])[:10]
     
     return jsonify(**context)

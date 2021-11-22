@@ -51,15 +51,19 @@ export default {
         }
     },
     created() {
+        console.log(this.$currentUser.username);
+        // Call API to get all posts
         this.axios({
             method: 'get',
             url: 'http://localhost:8080/api/v1/posts/'
         })
         .then(response => {
+            // Successful API call, put posts into local variable
             this.posts = response.data.data;
             console.log(this.posts);
         })
         .catch(function (error) {
+            // API call failed
             console.log(error);
         });
     },

@@ -28,7 +28,6 @@
                             <div class="form-group">
                                 <button class="btn btn-primary mt-4">Post</button>
                             </div>
-                            <!-- <router-link to="/feed" class="btn btn-primary mt-4">Post</router-link> -->
                         </form>
                     </div>
                 </div>
@@ -48,8 +47,7 @@ export default {
             FILE: null,
             caption: '',
             distance: '',
-            time: '',
-            owner: 'jack'
+            time: ''
         }
     },
     methods: {
@@ -57,19 +55,35 @@ export default {
             this.FILE = event.target.files[0];
         },
         onSubmit() {
-            // Upload file
+            // Get the form data
             const formData = new FormData();
             formData.append('file', this.FILE);
             formData.append('caption', this.caption);
             formData.append('distance', this.distance);
             formData.append('time', this.time);
-            formData.append('owner', this.owner);
+            formData.append('owner', this.$currentUser.username);
+
+            // Make sure user is logged in 
+            if (this.$currentUser.username === '') {
+                console.log("No user logged in.");
+                console.log(this.$currentUser.username);
+                return;
+            }
+
+            // Send API call
             this.axios.post('http://localhost:8080/api/v1/posts/', formData)
             .then(response => {
+                // Successful post
                 console.log(response);
+
+                // Redirect to feed
+                this.$router.push({ path: '/feed' });
             })
             .catch(function (error) {
+                // API call failed
                 console.log(error);
+
+                // Handle error (TODO)
             });
         }
     },

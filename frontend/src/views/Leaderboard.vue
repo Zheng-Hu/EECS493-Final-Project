@@ -39,11 +39,13 @@ export default {
         }
     },
     created() {
+        // Call API to get leaderboard
         this.axios({
             method: 'get',
             url: 'http://localhost:8080/api/v1/leaderboard/'
         })
         .then(response => {
+            // Successful API call, add place to each workout
             this.workouts = response.data.data;
             for (let i = 0; i < this.workouts.length; i++) {
                 this.workouts[i].place = i + 1;
@@ -52,6 +54,7 @@ export default {
             console.log(this.workouts);
         })
         .catch(function (error) {
+            // API call failed
             console.log(error);
         });
     },
