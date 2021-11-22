@@ -1,11 +1,17 @@
 <template>
   <div>
-    <h1>Feed</h1>
+    <Navigator page="Feed"/>
   </div>
 </template>
 
 <script>
+// @ is an alias to /src
+import Navigator from '@/components/Navigator.vue'
+
 export default {
-  name: 'Feed'
+  name: 'Feed',
+  components: {
+    Navigator
+  }
 }
 </script>
