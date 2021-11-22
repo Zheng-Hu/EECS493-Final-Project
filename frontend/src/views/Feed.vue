@@ -1,7 +1,11 @@
 <template>
-  <div>
-    <Navigator page="Feed"/>
-  </div>
+    <div>
+          <div>
+            <Navigator page="Feed"/>
+        </div>
+        <div>
+        </div>
+    </div>
 </template>
 
 <script>

@@ -1,7 +1,11 @@
 <template>
-  <div>
-    <Navigator page="Leaderboard"/>
-  </div>
+    <div>
+          <div>
+            <Navigator page="Feed"/>
+        </div>
+        <div>
+        </div>
+    </div>
 </template>
 
 <script>
