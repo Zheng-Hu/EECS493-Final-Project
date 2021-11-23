@@ -6,9 +6,28 @@
         <div class="container w-50 mt-5">
             <div v-for="(post, index) in posts" :key="post.postid" :id="index" class="card mb-5">
                 <div class="card-header">
-                    <h5 class="mb-1">
-                        {{ post.owner }}'s Run
-                    </h5>
+                    <div class="row">
+                        <div class="col-4">
+                            <h5 class="mb-1">
+                                {{ post.owner }}'s Run
+                            </h5>
+                        </div>
+                        <div class="col-7"></div>
+                        <div class="col-1">
+                            <h6 v-if="post.points < 4" class="mt-1">
+                                {{ post.points }}
+                            </h6>
+                            <h6 v-else-if="post.points < 7" class="mt-1 text-success">
+                                {{ post.points }}
+                            </h6>
+                            <h6 v-else-if="post.points < 10" class="mt-1 text-primary">
+                                {{ post.points }}
+                            </h6>
+                            <h6 v-else class="mt-1 text-danger">
+                                {{ post.points }}
+                            </h6>
+                        </div>
+                    </div>
                 </div>
                 <img class="card-img" :src="'http://localhost:8080/media/' + post.imageurl" />
                 <div class="card-body">
