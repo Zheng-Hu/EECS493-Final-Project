@@ -22,12 +22,12 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col">
+                        <div>
                             <p class="card-text text-muted text-weight-light">
                                 Distance: {{post.distance}} miles
                             </p>
                         </div>
-                        <div class="col">
+                        <div>
                             <p class="card-text text-muted text-weight-light">
                                 Time: {{post.time}} minutes
                             </p>

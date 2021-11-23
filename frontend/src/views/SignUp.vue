@@ -17,6 +17,9 @@
                             <label>Repeat Password</label>
                             <input v-model="re_password" type="password" class="form-control">
                         </div>
+                        <div v-if="error !== ''">
+                            <p class="text-danger">{{ error }}</p>
+                        </div>
                         <button class="btn btn-primary mt-4 mx-1">Create Account</button>
                         <router-link class="btn btn-secondary mt-4 mx-1" to="/">Log In</router-link>
                     </form>
@@ -33,7 +36,8 @@ export default {
         return {
             username: '',
             password: '',
-            re_password: ''
+            re_password: '',
+            error: ''
         }
     },
     beforeCreate() {
@@ -45,7 +49,12 @@ export default {
         onSubmit() {
             // Make sure passwords match
             if(this.password !== this.re_password) {
-                console.log("Passwords do not match.")
+                this.error = 'Passwords do not match'
+
+                // Reset passwords
+                this.password = '';
+                this.re_password = '';
+
                 return;
             }
 
@@ -64,12 +73,27 @@ export default {
 
                 // Reroute to feed
                 this.$router.push({ path: '/' });
-            })
-            .catch(function (error) {
-                // API call failed
-                console.log(error);
 
-                // Handle error (TODO)
+                // Remove error
+                this.error = '';
+            })
+            .catch(error => {
+                // API call failed
+                if(error.response.status === 400) {
+                    // Username or password not provided
+                    this.error = 'Please provide username and password';
+                }
+                else if(error.response.status === 401) {
+                    // Username already in use
+                    this.error = 'Username already in use';
+
+                    // Reset username
+                    this.username = '';
+                }
+                else {
+                    // Unknown error
+                    console.log(error);
+                }
             });
         }
     }

@@ -13,6 +13,9 @@
                             <label class="sr-only">Password</label>
                             <input v-model="password" type="password" class="form-control">
                         </div>
+                        <div v-if="error !== ''">
+                            <p class="text-danger">{{ error }}</p>
+                        </div>
                         <div class="mt-4">
                             <button class="btn btn-primary mx-1">Log In</button>
                             <router-link class="btn btn-warning mx-1" to="/signup">Sign Up</router-link>
@@ -30,7 +33,8 @@ export default {
     data() {
         return {
             username: '',
-            password: ''
+            password: '',
+            error: ''
         }
     },
     beforeCreate() {
@@ -58,12 +62,24 @@ export default {
 
                 // Reroute to feed
                 this.$router.push({ path: '/feed' });
-            })
-            .catch(function (error) {
-                // API call failed
-                console.log(error);
 
-                // Handle error (TODO)
+                // Remove error
+                this.error = '';
+            })
+            .catch(error => {
+                // API call failed
+                if(error.response.status === 401) {
+                    // Incorrect password
+                    this.error = 'Incorrect password';
+                }
+                else if(error.response.status === 404) {
+                    // User does not exist
+                    this.error = 'Username does not exist';
+                }
+                else {
+                    // Unknown error
+                    console.log(error);
+                }
             });
         }
     }

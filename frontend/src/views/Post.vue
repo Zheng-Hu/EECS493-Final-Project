@@ -25,6 +25,9 @@
                                 <label>Image Upload</label>
                                 <input type="file" @change="onFileUpload" class="form-control" multiple accept="image/*">
                             </div>
+                            <div v-if="error !== ''">
+                                <p class="text-danger">{{ error }}</p>
+                            </div>
                             <div class="form-group">
                                 <button class="btn btn-primary mt-4">Post</button>
                             </div>
@@ -47,7 +50,8 @@ export default {
             FILE: null,
             caption: '',
             distance: '',
-            time: ''
+            time: '',
+            error: ''
         }
     },
     beforeCreate() {
@@ -62,8 +66,13 @@ export default {
         onSubmit() {
             // Make sure user is logged in 
             if (this.$currentUser.username === '') {
-                console.log("No user logged in.");
-                console.log(this.$currentUser.username);
+                this.error = 'No user logged in';
+                return;
+            }
+
+            // Validate form data
+            if(this.caption === '' || this.distance === '' || this.time === '' || this.FILE === null) {
+                this.error = 'Please fill in all fields';
                 return;
             }
 
@@ -84,11 +93,10 @@ export default {
                 // Redirect to feed
                 this.$router.push({ path: '/feed' });
             })
-            .catch(function (error) {
+            .catch(error => {
                 // API call failed
+                this.error = 'Post could not be made';
                 console.log(error);
-
-                // Handle error (TODO)
             });
         }
     },
