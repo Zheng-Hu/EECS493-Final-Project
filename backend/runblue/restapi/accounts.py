@@ -41,8 +41,8 @@ def create_account():
     # Insert into the database
     cur = runblue.model.get_db()
     cur.execute(
-        "INSERT INTO users (username, password, created) VALUES (%s, %s, DEFAULT)",
-        (username, password)
+        "INSERT INTO users (username, password, created, points) VALUES (%s, %s, DEFAULT, %s)",
+        (username, password, 0)
     )
 
     # Return success code

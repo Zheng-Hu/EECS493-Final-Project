@@ -49,10 +49,24 @@ def upload_post():
     # Retrieve the id of the post created
     created_postid = cur.fetchone()["postid"]
 
+    # Calculate the number of points for this workout
+    points = int(float(distance) * 1.2)
+
     # Insert into the workouts table
     cur.execute(
-        "INSERT INTO workouts(workoutid, time, distance, created, owner, postid) VALUES (DEFAULT, %s, %s, DEFAULT, %s, %s)",
-        (time, distance, owner, created_postid)
+        "INSERT INTO workouts(workoutid, time, distance, created, owner, postid, points) VALUES (DEFAULT, %s, %s, DEFAULT, %s, %s, %s)",
+        (time, distance, owner, created_postid, points)
+    )
+
+    # Add points to user's total
+    cur.execute(
+        "SELECT points FROM users WHERE username = %s",
+        (owner,)
+    )
+    user_points = cur.fetchone()["points"]
+    cur.execute(
+        "UPDATE users SET points = %s WHERE username = %s",
+        (user_points + points, owner)
     )
 
     # Return created response
@@ -93,7 +107,7 @@ def get_posts():
     for post in context["data"]:
         # Get the workout data from db
         cur.execute(
-            "SELECT distance, time FROM workouts where postid = %s",
+            "SELECT distance, time, points FROM workouts where postid = %s",
             (post["postid"],)
         )
         workout = cur.fetchone()
@@ -101,6 +115,7 @@ def get_posts():
         # Add workout data to this post
         post["distance"] = workout["distance"]
         post["time"] = workout["time"]
+        post["points"] = workout["points"]
 
     return jsonify(**context)
 
@@ -126,7 +141,7 @@ def get_post(postid):
 
     # Get the workout data from db
     cur.execute(
-        "SELECT distance, time FROM workouts where postid = %s",
+        "SELECT distance, time, points FROM workouts where postid = %s",
         (postid,)
     )
     workout = cur.fetchone()
@@ -134,5 +149,6 @@ def get_post(postid):
     # Add workout data to response
     context["data"]["distance"] = workout["distance"]
     context["data"]["time"] = workout["time"]
+    context["data"]["points"] = workout["points"]
 
     return jsonify(**context)

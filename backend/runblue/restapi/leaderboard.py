@@ -5,6 +5,7 @@ URLS include:
 
 /api/v1/leaderboard/            [GET]
 /api/v1/leaderboard/?user=      [GET]
+/api/v1/leaderboard/points/     [GET]
 """
 
 from flask import jsonify, request
@@ -47,5 +48,25 @@ def get_leaderboard():
         workout["permiletime"] = workout["time"] / workout["distance"]
 
     context["data"] = sorted(context["data"], key=lambda i: i["permiletime"])[:10]
+    
+    return jsonify(**context)
+
+@runblue.app.route('/api/v1/leaderboard/points/', methods=["GET"])
+def get_points_leaderboard():
+    """Get the top 10 users based on points."""
+    # Setup context for response
+    context = {
+        "url": "/api/v1/leaderboard/points/"
+    }
+
+    # Get db connection
+    cur = runblue.model.get_db()
+
+    # Retrieve leaderboard based on points from database
+    cur.execute(
+        "SELECT username, points FROM users ORDER BY points DESC"
+    )
+    
+    context["data"] = list(cur.fetchall())[:10]
     
     return jsonify(**context)
