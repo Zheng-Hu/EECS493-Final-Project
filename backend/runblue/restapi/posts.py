@@ -50,7 +50,7 @@ def upload_post():
     created_postid = cur.fetchone()["postid"]
 
     # Calculate the number of points for this workout
-    points = int(float(distance) * 1.2)
+    points = int(float(distance) * 1.44)
 
     # Insert into the workouts table
     cur.execute(

@@ -14,11 +14,11 @@
                                 <textarea v-model="caption" class="form-control"></textarea>
                             </div>
                             <div class="form-group mt-2">
-                                <label>Distance</label>
+                                <label>Distance (miles)</label>
                                 <input v-model="distance" type="text" class="form-control">
                             </div>
                             <div class="form-group mt-2">
-                                <label>Time</label>
+                                <label>Time (minutes)</label>
                                 <input v-model="time" type="text" class="form-control">
                             </div>
                             <div class="form-group mt-2">

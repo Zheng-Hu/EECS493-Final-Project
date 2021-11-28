@@ -14,11 +14,11 @@ VALUES
 
 INSERT INTO workouts(workoutid, time, distance, created, owner, postid, points)
 VALUES
-    (DEFAULT, 21.4, 2.9, DEFAULT, 'jack', 1, 3),
+    (DEFAULT, 52.3, 7.1, DEFAULT, 'jack', 1, 10),
     (DEFAULT, 38.8, 5.2, DEFAULT, 'jack', 3, 7),
-    (DEFAULT, 22.3, 3.2, DEFAULT, 'jill', 2, 5),
+    (DEFAULT, 22.3, 3.2, DEFAULT, 'jill', 2, 4),
     (DEFAULT, 18.1, 1.7, DEFAULT, 'jill', 5, 3),
     (DEFAULT, 9.8, 1.1, DEFAULT, 'kevin', 4, 2),
-    (DEFAULT, 52.3, 7.1, DEFAULT, 'jack', NULL, 11),
+    (DEFAULT, 21.4, 2.9, DEFAULT, 'jack', NULL, 4),
     (DEFAULT, 19.0, 2.5, DEFAULT, 'jill', NULL, 4),
     (DEFAULT, 12.1, 1.4, DEFAULT, 'kevin', NULL, 3);
