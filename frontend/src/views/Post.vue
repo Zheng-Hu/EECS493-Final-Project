@@ -60,6 +60,9 @@ export default {
         }
     },
     methods: {
+        isNumeric(str) {
+            return !isNaN(str) && !isNaN(parseFloat(str))
+        },
         onFileUpload (event) {
             this.FILE = event.target.files[0];
         },
@@ -73,6 +76,19 @@ export default {
             // Validate form data
             if(this.caption === '' || this.distance === '' || this.time === '' || this.FILE === null) {
                 this.error = 'Please fill in all fields';
+                return;
+            }
+
+            // Check if distance or time are not numbers
+            if(!this.isNumeric(this.distance))
+            {
+                this.error = 'Distance must be a number of miles';
+                return;
+            }
+            
+            if(!this.isNumeric(this.time))
+            {
+                this.error = 'Time must be a number of miles';
                 return;
             }
 
