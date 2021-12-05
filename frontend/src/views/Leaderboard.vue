@@ -4,39 +4,41 @@
             <Navigator page="Leaderboard"/>
         </div>
         <div class="row justify-content-center">
-            <h1 class="display-4 py-2 text-truncate text-center my-3">Workout Leaderboard</h1>
-            <table class="table table-striped table-bordered w-50">
+            <h3 class="display-5 py-2 text-truncate text-center my-3">User Leaderboard</h3>
+            <table class="table" style="width: 40%">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">User</th>
-                        <th scope="col">Distance</th>
-                        <th scope="col">Time</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="(workout, index) in workouts" :key="workout.workoutid" :id="index">
-                        <th>{{ workout.place }}</th>
-                        <th>{{ workout.owner }}</th>
-                        <td>{{ workout.distance }}</td>
-                        <td>{{ workout.time }}</td>
-                    </tr>
-                </tbody>
-                </table>
-        </div>
-        <div class="row justify-content-center">
-            <h1 class="display-4 py-2 text-truncate text-center my-3">Points Leaderboard</h1>
-            <table class="table table-striped table-bordered w-50">
-                <thead>
-                    <tr>
-                        <th scope="col">User</th>
-                        <th scope="col">Points</th>
+                        <th scope="col" style="width: 30%"></th>
+                        <th scope="col" style="width: 40%">User</th>
+                        <th scope="col" style="width: 40%">Points</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="(user, index) in users" :key="user.username" :id="index">
+                        <th>{{ user.emoji }}</th>
                         <th>{{ user.username }}</th>
                         <th>{{ user.points }}</th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row justify-content-center">
+            <h3 class="display-5 py-2 text-truncate text-center my-3">Workout Leaderboard</h3>
+            <table class="table table-striped table-sm w-50">
+                <thead>
+                    <tr>
+                        <th scope="col" style="width: 25%">Points</th>
+                        <th scope="col" style="width: 25%">User</th>
+                        <th scope="col" style="width: 25%">Distance (miles)</th>
+                        <th scope="col" style="width: 25%">Time (minutes)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(workout, index) in workouts" :key="workout.workoutid" :id="index">
+                        <th>{{ workout.points }}</th>
+                        <th>{{ workout.owner }}</th>
+                        <td>{{ workout.distance }}</td>
+                        <td>{{ workout.time }}</td>
                     </tr>
                 </tbody>
                 </table>
@@ -70,9 +72,6 @@ export default {
         .then(response => {
             // Successful API call, add place to each workout
             this.workouts = response.data.data;
-            for (let i = 0; i < this.workouts.length; i++) {
-                this.workouts[i].place = i + 1;
-            }
 
             console.log(this.workouts);
         })
@@ -89,6 +88,11 @@ export default {
         .then(response => {
             // Successful API call, add place to each workout
             this.users = response.data.data;
+
+            this.users[0]["emoji"] = "🥇";
+            this.users[1]["emoji"] = "🥈";
+            this.users[2]["emoji"] = "🥉";
+
             console.log(this.users);
         })
         .catch(function (error) {

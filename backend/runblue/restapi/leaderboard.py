@@ -33,27 +33,24 @@ def get_leaderboard():
 
         # Get the user's leaderboard
         cur.execute(
-            "SELECT distance, owner, time, workoutid FROM workouts WHERE owner = %s",
+            "SELECT distance, owner, time, workoutid, points FROM workouts WHERE owner = %s",
             (username,)
         )
         context['data'] = list(cur.fetchall())
     else:
         cur.execute(
-            "SELECT distance, owner, time, workoutid FROM workouts"
+            "SELECT distance, owner, time, workoutid, points FROM workouts"
         )
         context["data"] = list(cur.fetchall())
 
-    # Sort by per-mile time
-    for workout in context["data"]:
-        workout["permiletime"] = workout["time"] / workout["distance"]
-
-    context["data"] = sorted(context["data"], key=lambda i: i["permiletime"])[:10]
+    # Sort by points
+    context["data"] = sorted(context["data"], key=lambda i: i["points"], reverse=True)[:10]
     
     return jsonify(**context)
 
 @runblue.app.route('/api/v1/leaderboard/points/', methods=["GET"])
 def get_points_leaderboard():
-    """Get the top 10 users based on points."""
+    """Get the top 3 users based on points."""
     # Setup context for response
     context = {
         "url": "/api/v1/leaderboard/points/"
@@ -67,6 +64,9 @@ def get_points_leaderboard():
         "SELECT username, points FROM users ORDER BY points DESC"
     )
     
-    context["data"] = list(cur.fetchall())[:10]
+    context["data"] = list(cur.fetchall())[:3]
+
+    if len(context["data"]) != 3:
+        return runblue.error_code("Not 3 users.", 400)
     
     return jsonify(**context)

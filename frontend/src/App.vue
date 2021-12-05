@@ -7,7 +7,7 @@
                 </div>
                 <div class="col-10"></div>
                 <div class="col-1">
-                    <button v-if="this.$currentUser.username !== ''" v-on:click="logoutUser" class="btn btn-secondary">logout</button>
+                    <button v-if="this.$currentUser.username !== ''" v-on:click="logoutUser" class="btn btn-secondary">Logout</button>
                 </div>
             </div>
         </nav>

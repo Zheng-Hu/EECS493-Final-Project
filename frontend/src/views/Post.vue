@@ -13,9 +13,15 @@
                                 <label>Caption</label>
                                 <textarea v-model="caption" class="form-control"></textarea>
                             </div>
-                            <div class="form-group mt-2">
-                                <label>Distance (miles)</label>
-                                <input v-model="distance" type="text" class="form-control">
+                            <div class="row mt-2">
+                                <div class="form-group col-md-9">
+                                    <label>Distance (miles)</label>
+                                    <input v-model="distance" @input="handleDistanceChange" type="text" class="form-control">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label>Points</label>
+                                    <input disabled :placeholder="points" type="text" class="form-control">
+                                </div>
                             </div>
                             <div class="form-group mt-2">
                                 <label>Time (minutes)</label>
@@ -51,7 +57,8 @@ export default {
             caption: '',
             distance: '',
             time: '',
-            error: ''
+            error: '',
+            points: 0
         }
     },
     beforeCreate() {
@@ -65,6 +72,14 @@ export default {
         },
         onFileUpload (event) {
             this.FILE = event.target.files[0];
+        },
+        handleDistanceChange() {
+            if(this.isNumeric(this.distance)) {
+                this.points = Math.floor(Number(this.distance) * 1.44);
+            }
+            else {
+                this.points = 0;
+            }
         },
         onSubmit() {
             // Make sure user is logged in 
