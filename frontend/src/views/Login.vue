@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row text-dark">
             <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto form p-4">
-                <h1 class="display-4 py-2 text-truncate text-center mb-3">Log In!</h1>
+                <h1 class="display-5 py-2 text-truncate text-center mb-3">Welcome to RunBlue!</h1>
                 <div class="px-2">
                     <form @submit.prevent="onSubmit" class="justify-content-center">
                         <div class="form-group mt-2">

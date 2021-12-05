@@ -14,16 +14,7 @@
                         </div>
                         <div class="col-7"></div>
                         <div class="col-1">
-                            <h6 v-if="post.points < 4" class="mt-1">
-                                {{ post.points }}
-                            </h6>
-                            <h6 v-else-if="post.points < 7" class="mt-1 text-success">
-                                {{ post.points }}
-                            </h6>
-                            <h6 v-else-if="post.points < 10" class="mt-1 text-primary">
-                                {{ post.points }}
-                            </h6>
-                            <h6 v-else class="mt-1 text-danger">
+                            <h6 style="color: #00008b" class="mt-1">
                                 {{ post.points }}
                             </h6>
                         </div>

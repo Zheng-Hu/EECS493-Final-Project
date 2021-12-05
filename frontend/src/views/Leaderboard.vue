@@ -4,7 +4,7 @@
             <Navigator page="Leaderboard"/>
         </div>
         <div class="row justify-content-center">
-            <h3 class="display-5 py-2 text-truncate text-center my-3">User Leaderboard</h3>
+            <h3 class="display-5 py-2 text-truncate text-center my-3">Top Users</h3>
             <table class="table" style="width: 40%">
                 <thead>
                     <tr>
@@ -23,7 +23,7 @@
             </table>
         </div>
         <div class="row justify-content-center">
-            <h3 class="display-5 py-2 text-truncate text-center my-3">Workout Leaderboard</h3>
+            <h3 class="display-5 py-2 text-truncate text-center my-3">Top Workouts</h3>
             <table class="table table-striped table-sm w-50">
                 <thead>
                     <tr>

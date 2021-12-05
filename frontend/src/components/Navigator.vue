@@ -2,8 +2,8 @@
     <div class="container text-center mt-3">
         <div class="row justify-content-center">
             <div class="col-sm-2">
-                <router-link to="/post" v-if="page == 'Post'" class="btn btn-warning">Make a Post</router-link>
-                <router-link to="/post" v-else class="btn btn-secondary">Make a Post</router-link>
+                <router-link to="/post" v-if="page == 'Post'" class="btn btn-warning">Post</router-link>
+                <router-link to="/post" v-else class="btn btn-secondary">Post</router-link>
             </div>
             <div class="col-sm-2">
                 <router-link to="/feed" v-if="page == 'Feed'" class="btn btn-warning">Feed</router-link>
