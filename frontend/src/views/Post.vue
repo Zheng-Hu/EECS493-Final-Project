@@ -84,6 +84,10 @@ export default {
         onFileUpload (event) {
             this.FILE = event.target.files[0];
         },
+        infoClick()
+        {
+            alert("The points for your post is calculated based on Distance! Earn points to climb the leaderboard!");
+        },
         handleDistanceChange() {
             if(this.isNumeric(this.distance)) {
                 this.points = Math.floor(Number(this.distance) * 1.44);

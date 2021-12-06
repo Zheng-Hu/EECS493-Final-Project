@@ -5,7 +5,7 @@
         </div>
         <div class="row justify-content-center">
             <h3 class="display-5 py-2 text-truncate text-center my-3">Top Users</h3>
-            <table class="table" style="width: 40%">
+            <table class="table" style="width: 30%">
                 <thead>
                     <tr>
                         <th scope="col" style="width: 30%"></th>

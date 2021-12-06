@@ -14,7 +14,7 @@
                         </div>
                         <div class="col-7"></div>
                         <div class="col-1">
-                            <h6 style="color: #00008b" class="mt-1">
+                            <h6 @click="infoClick" style="color: #00008b" class="mt-1">
                                 {{ post.points }}
                             </h6>
                         </div>
@@ -81,6 +81,12 @@ export default {
             // API call failed
             console.log(error);
         });
+    },
+    methods: {
+        infoClick()
+        {
+            alert("The points for your post is calculated based on Distance! Earn points to climb the leaderboard!");
+        }
     },
     components: {
         Navigator
